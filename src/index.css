@@ -117,9 +117,9 @@
   text-decoration: none;
 	border: none;
 }
+
 body {
   overflow-x: hidden;
-  background-color:#eaeaea;
 }
 .color1{
   color: #333;
@@ -162,7 +162,13 @@ body {
 .logoImg{
   width: 100px;
 }
-
+.navLink{
+	transition: all .3s linear;
+}
+.navLink:hover{
+	color: #B3A159;
+	transition: all .3s linear;
+}
 
 /* =============================FORM=============== */
 
@@ -175,21 +181,34 @@ body {
 }
 
 .sendBtn{
-	width: 400px;
-	margin: auto;
-	display: flex;
-	text-align: center;
-	justify-content: center;
-	height: 40px;
-	margin-top: 20px;
-	cursor: pointer;
-	border-radius: 4px;
-	background: #cacaca;
-	font-size: 12px;
+    width: 400px;
+    margin: auto;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #B3A159;
+	font-size: 13px;
+	font-weight: 400;
+    transition: all .3s linear;
+    color: #fff;
+}
+.sendBtn:hover{
+	background-color: #b3a159cc;
+	transition: all .3s linear;
 }
 .formTitle{
-	text-align: center;
-
+	margin: auto;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 70px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #b6b6b6;
+    max-width: 300px;
 }
 
 
@@ -197,7 +216,7 @@ body {
 
 .Input {
 	width: 100%;
-	padding: 10px;
+	padding: 10px 0px;
 	box-sizing: border-box;
 }
 
@@ -214,16 +233,21 @@ body {
 	display: block;
 	width: 80%;
 	margin: auto;
-	min-width: 400px;
+	min-width: 300px;
 	border-radius: 4px;
 	background-color: whitesmoke;
 	height: 50px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 400;
 	max-width: 80%;
 }
+*::placeholder{
+	color: #B3A159;
+}
 textarea{
-	min-height:100px;
+	min-height:150px;
 	margin: 10px;
+	resize: none;
 }
 
 .InputElement:focus {
@@ -239,15 +263,23 @@ textarea{
 }
 .fileInput{
 	width: 80%;
-	background-color:#cacaca;
+    background-color: #f5f5f5;
 	margin: auto;
 	position: relative;
 	overflow: hidden;
 	text-align: center;
-	height: 40px;
-	line-height: 40px;
+	height: 50px;
+	line-height: 50px;
 	border-radius: 4px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 400;
+	transition: all .3s linear;
+	color: #B3A159;
+}
+.fileInput:hover{
+	background-color: #ddd;
+	transition: all .3s linear;
+
 }
 .fileInputٰValid{
 	width: 80%;
@@ -259,7 +291,8 @@ textarea{
 	height: 40px;
 	line-height: 40px;
 	border-radius: 4px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 400;
 	padding: 0px 10px;
 }
 .fileInputField{
@@ -288,7 +321,8 @@ textarea{
 	width: 90%;
 	color: #ef4343;
 	border-radius: 4px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 400;
 	top: -500px;
 	transition: all .3s linear;
 }
@@ -305,7 +339,8 @@ textarea{
 	width: 90%;
 	color: #ef4343;
 	border-radius: 4px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 400;
 	top: 0;
 	transition: all .3s linear;
 }
@@ -316,4 +351,8 @@ textarea{
 
 .footer{
 height: 80px;
+}
+
+.zz{
+	display: flex;
 }

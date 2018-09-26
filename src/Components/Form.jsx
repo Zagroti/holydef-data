@@ -106,7 +106,12 @@ class Form extends Component {
         formIsValid: false,
         loading: false,
     }
-
+    componentDidMount(){
+        axios.get('/api/v1/article/1.json')
+        .then(res=>{
+            console.log(res)
+        })
+    }
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
             ...this.state.orderForm
@@ -145,13 +150,13 @@ class Form extends Component {
         const order = {
             data: this.state.orderForm,
         }
-        axios.post( 'api/v1/article/1', order )
+        axios.post( 'api/v1/article/1.json', order )
             .then( response => {
-                console.log(response)
-            } )
+                console.log(this.order)
+            })
             .catch( error => {
-                this.setState( { loading: false } );
-            } );
+                console.log(error)
+            });
             
         
     }

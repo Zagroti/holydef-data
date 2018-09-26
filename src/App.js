@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <Router >
-        <div >
+        <div className="bgGradient" >
           <Route exact path="/" component={Home} />
           <Route  path="/Home" component={Home} />
         </div>
