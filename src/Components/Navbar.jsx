@@ -13,10 +13,10 @@ render() {
                 </div>
                 <ul className="menuUl">
                     <li className="menuUlLi">
-                        <NavLink className="navLink" to={"/Home"}>   خانه </NavLink>    
+                        <NavLink className="navLink color1" to={"/Home"}>   خانه </NavLink>    
                     </li>
                     <li className="menuUlLi" >
-                        <NavLink className="navLink" to={"/ContactUs"}>  تماس با ما </NavLink>
+                        <NavLink className="navLink color1" to={"/ContactUs"}>  تماس با ما </NavLink>
                     </li>
                 </ul>
             </div>

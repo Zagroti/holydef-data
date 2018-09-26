@@ -4,7 +4,6 @@ import React from 'react';
 const input = ( props ) => {
     let inputElement = null;
     const inputClasses = ['InputElement'];
-    const inputClassesFile = [''];
 
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push('Invalid');
@@ -36,7 +35,7 @@ const input = ( props ) => {
                     {...props.elementConfig}
                     value={props.value}
                     onChange={props.changed}
-                    required />
+                     />
             </div>
             break;
         case ( 'select' ):

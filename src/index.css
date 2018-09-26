@@ -309,3 +309,11 @@ textarea{
 	top: 0;
 	transition: all .3s linear;
 }
+
+
+/* ================footer ================ */
+
+
+.footer{
+height: 80px;
+}

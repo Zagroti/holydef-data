@@ -1,5 +1,6 @@
 import React , {Component} from 'react'
 import Input from '../Components/Input/Input'
+import axios from '../axios';
 
 
 
@@ -36,7 +37,7 @@ class Form extends Component {
                 valid: false,
                 touched: false
             },
-            shortDesc: {
+            short_description: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
@@ -49,7 +50,7 @@ class Form extends Component {
                 valid: false,
                 touched: false
             },
-            Description: {
+            description: {
                 elementType: 'textarea',
                 elementConfig: {
                     type: 'text',
@@ -141,6 +142,16 @@ class Form extends Component {
     orderHandler = ( event ) => {
 
         event.preventDefault();
+        const order = {
+            data: this.state.orderForm,
+        }
+        axios.post( 'api/v1/article/1', order )
+            .then( response => {
+                console.log(response)
+            } )
+            .catch( error => {
+                this.setState( { loading: false } );
+            } );
             
         
     }
