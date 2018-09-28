@@ -145,6 +145,10 @@ body {
 .bgColor4{
 	background-color: #0daeab;
 }
+
+.colorSilver{
+	background-color: #f6f6f6;
+}
 .container{
   max-width: 1200px;
   margin: auto;
@@ -153,7 +157,10 @@ body {
 .menu{
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
+  justify-content: space-between; 
+  padding: 0.5rem;
+
+
 }
 .menuUl{
   display: flex;
@@ -476,6 +483,11 @@ textarea{
 
 
 .footer{
-height: 80px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%; 
+	text-align: center;
+	height: 2rem;
 }
 

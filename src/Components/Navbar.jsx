@@ -7,7 +7,7 @@ class Navbar extends Component {
 render() {
     return (
         <div>
-            <div className="menu container">
+            <div className="menu   colorSilver">
                 <div className="logo">
                     <NavLink className="navLink color1" exact activeclassname={"active"} to={"/"}> 
                         <img className="logoImg"  src={logo} alt="لوگو" />
