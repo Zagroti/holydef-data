@@ -223,6 +223,9 @@ class Form extends Component {
         console.log(this.state)
     }
 
+    componentWillMount(){
+        this.setState({ success: true, successText: 'عملیات با موفقیت انجام شد.' })
+    }
  
 
     render() {
