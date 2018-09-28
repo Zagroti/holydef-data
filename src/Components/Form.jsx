@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Input from '../Components/Input/Input'
-import axios from '../axios';
+import axios from '../axios';  // set base URL from axios --->
 
 
 
@@ -158,6 +158,7 @@ class Form extends Component {
 
 
     selectHandler = event => {
+        // TODO checking latter and delete any consol
         console.log(event.target)
 
         if (event.target.name === 'عکس') {
@@ -173,7 +174,7 @@ class Form extends Component {
                 audio: event.target.files[0]
             })
         }
-        console.log(this.state)
+        console.log(this.state) // TODO delete latter
     }
 
 
@@ -203,51 +204,52 @@ class Form extends Component {
         axios.post('api/v1/article/25', bodyFormData, {
             onUploadProgress: progressBar => {
                 let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                console.log(progressBar)
-                if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
-                    this.setState({ progressPercent: progressPercent })
-                } else {
-                    this.setState({ progressPercent: null })
-                }
-                progressPercent !== 100 || progressPercent === null ? this.setState({ loading: true }) : this.setState({ loading: false })
+                console.log(progressBar) // TODO Delete lattetr
+
+                    if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
+                        this.setState({ progressPercent: progressPercent })
+                    } else {
+                        this.setState({ progressPercent: null })
+                    }
+                     progressPercent !== 100 || progressPercent === null ? this.setState({ loading: true }) : this.setState({ loading: false })
             }
         })
             .then(res => {
-                this.setState({ success: true, successText: 'تکمیل عملیات ' })
+                this.setState({ success: true, successText: 'عملیات با موفقیت انجام شد' })
                 res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
             })
             .catch(err => {
                 this.setState({ error: true, errorText: 'خطا در انجام عملیت، لطفا دوباره امتحان کنید' })
 
             })
-        console.log(this.state)
+        console.log(this.state) // TODO delete latter
     }
 
-    componentWillMount(){
-        this.setState({ success: true, successText: 'عملیات با موفقیت انجام شد.' })
-    }
- 
+   
 
     render() {
         let errorClass = ['']
         let successClass = ['']
-        if (this.state.error) {
-            errorClass = ['errorText']
-        }else{
-            errorClass = ['hidden']
-        }
-        if(this.state.success){
-            successClass =['successClass']
-        }else{
-            successClass =['hidden']
-        }
-        const formElementsArray = [];
-        for (let key in this.state.orderForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.orderForm[key]
-            });
-        }
+            // --- set class for state of error handeling ---
+            if (this.state.error) {
+                errorClass = ['errorText']
+            }else{
+                errorClass = ['hidden']
+            }
+            if(this.state.success){
+                successClass =['successClass']
+            }else{
+                successClass =['hidden']
+            }
+            const formElementsArray = [];
+            for (let key in this.state.orderForm) {
+                formElementsArray.push({
+                    id: key,
+                    config: this.state.orderForm[key]
+                });
+            }
+
+        // --- create form elemnt of main page *Input * Button *Uploader * ... ----
         let form = (
             <form onSubmit={this.orderHandler}>
                 <div>
