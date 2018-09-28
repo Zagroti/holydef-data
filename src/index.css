@@ -206,7 +206,7 @@ body {
     margin-top: 60px;
     margin-bottom: 40px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 30px;
     background: #0daeab;
 	font-size: 13px;
 	font-weight: 400;
@@ -225,7 +225,8 @@ body {
     font-weight: 400;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    max-width: 300px;
+	max-width: 300px;
+	padding-top: 1rem;
 }
 
 
@@ -294,19 +295,22 @@ textarea{
     margin: auto;
     position: relative;
     overflow: hidden;
-    text-align: center;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 4px;
+    text-align: center; 
+    line-height:2rem;
+    border-radius: 10px;
     font-size: 13px;
     font-weight: 400;
     transition: all .3s linear;
     color: #0daeab;
-    width: 100%;
+	width: 100%;
+	padding: 0.5rem;
+	border: 2px solid #0daeab;
+	cursor: pointer;
 }
 .fileInput:hover{
-	background-color: #ddd;
+	background-color: #0daeab;
 	transition: all .3s linear;
+	color: #fff
 
 }
 .fileBox{
@@ -381,15 +385,15 @@ textarea{
 
 .svg-inline--fa.fa-w-12 , .svg-inline--fa.fa-w-16{
     margin: 0px 10px;
-    width: 20px;
+    width: 30px;
     overflow: visible;
-    height: 20px;
+    height: 30px;
 }
 .myIcon{
 	display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+	align-items: center; 
 }
  
 
@@ -491,3 +495,7 @@ textarea{
 	height: 2rem;
 }
 
+.blueBorder{
+	border: 1px solid;
+	border-color: #077c7a;
+}

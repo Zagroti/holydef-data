@@ -254,7 +254,7 @@ class Form extends Component {
                         /> : null
                     ))}
                 </div>
-                <div className={'formInputFile'}>
+                <div className={'formInputFile '}>
                     {formElementsArray.map(formElement => (
                         formElement.config.elementType === 'file' ? <Input
                             key={formElement.id}
@@ -278,7 +278,7 @@ class Form extends Component {
         return (
             <div>
                 <div className="container formDiv" >
-                    <h2 className="formTitle color1" >فرم زیر را کامل کنید </h2>
+                    <h2 className="formTitle color1" >سامانه درج محتوا</h2>
                     {form}
                     <div>
                         {this.state.loading ?
