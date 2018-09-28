@@ -397,28 +397,20 @@ textarea{
 .loader {
   margin: 60px auto;
   font-size: 10px;
-  position: relative;
-  text-indent: -9999em;
-  border-top: .5em solid rgba(13,197,193, 0.2);
-  border-right: .5em solid rgba(13,197,193, 0.2);
-  border-bottom: .5em solid rgba(13,197,193, 0.2);
+  position: fixed;
+  border-top: .5em solid #fff;
+  border-right: .5em solid #fffc;
+  border-bottom: .5em solid #fffc;
   border-left: .5em solid #0dc5c1;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-animation: load8 .5s infinite linear;
   animation: load8 .5s infinite linear;
+  top: 30%;
+  left: 49vw;
 }
-@-webkit-keyframes load8 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
+
 @keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -430,8 +422,55 @@ textarea{
   }
 }
 
-
-
+.loadingBox{
+	width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: #0000002b;
+	top: 0;
+	left: 0;
+}
+.loadingPercent{
+    position: fixed;
+    top: 46%;
+    left: 48.4vw;
+    font-size: 12px;
+    padding: 0px 3px;
+    color: #077c7a;
+    text-align: center;
+}
+.errorText{
+	position: fixed;
+    top: 40%;
+    left: 45vw;
+    font-size: 14px;
+    color: red;
+	background-color: #0003;
+	animation: error 4s normal forwards linear;
+}
+.successClass{
+	position: fixed;
+    top: 40%;
+    left: 45vw;
+    font-size: 14px;
+    color: blue;
+	background-color: #0003;
+	animation: error 4s normal forwards linear;
+}
+.hidden{
+	display: none;
+}
+@keyframes error {
+	0% {
+		opacity: 0
+	}
+	50%{
+		opacity:1
+	}
+	100%{
+		opacity: 0
+	}
+}
 
 /* ================footer ================ */
 

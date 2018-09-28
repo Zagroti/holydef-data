@@ -106,9 +106,6 @@ class Form extends Component {
         },
         formIsValid: false,
         loading: false,
-        title: 'مشتبی',
-        short_description: '',
-        description: '',
         image: {
             name: null
         },
@@ -118,7 +115,11 @@ class Form extends Component {
         audio: {
             name: null
         },
-        progressPercent : null
+        progressPercent: null,
+        error: false,
+        errorText: '',
+        success: false,
+        successText: ''
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -170,45 +171,21 @@ class Form extends Component {
     }
 
 
-    fileUpload = () => {
-        const fd = new FormData()
-        fd.append('image', this.state.image, this.state.image.name)
-        fd.append('video', this.state.video, this.state.video.name)
-        fd.append('audio', this.state.audio, this.state.audio.name)
-        fd.append('title', this.state.title)
-
-        axios.post('api/v1/article/21', fd, {
-            onUploadProgress : progressBar => {
-                let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                console.log(' UP :  ' +  progressPercent + '%')
-                this.setState({progressPercent : progressPercent})
-            }
-        })
-        .then(res => {
-                console.log('res ::: ' + res)
-            })
-        console.log(this.state)
-    }
-
 
     checkValidity(value, rules) {
-
         let isValid = true;
         if (!rules) {
             return true;
         }
-
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
-
         return isValid;
     }
+    
     orderHandler = (event) => {
-
         event.preventDefault();
-        console.log(event)
-
+        
         var bodyFormData = new FormData();
         bodyFormData.append('title', this.state.orderForm.title.value);
         bodyFormData.append('short_description', this.state.orderForm.short_description.value);
@@ -217,18 +194,43 @@ class Form extends Component {
         bodyFormData.append('video', this.state.video, this.state.video.name)
         bodyFormData.append('audio', this.state.audio, this.state.audio.name)
 
-        axios.post('api/v1/article/21', bodyFormData)
-            .then(response => {
-                console.log(response)
+        axios.post('api/v1/article/25', bodyFormData, {
+            onUploadProgress: progressBar => {
+                let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
+                console.log(progressBar)
+                if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
+                    this.setState({ progressPercent: progressPercent })
+                } else {
+                    this.setState({ progressPercent: null })
+                }
+                progressPercent !== 100 || progressPercent === null ? this.setState({ loading: true }) : this.setState({ loading: false })
+            }
+        })
+            .then(res => {
+                this.setState({ success: true, successText: 'تکمیل عملیات ' })
+                res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
             })
-            .catch(error => {
-                console.log()
-            });
+            .catch(err => {
+                this.setState({ error: true, errorText: 'دوباره امتحان کنید ' })
+
+            })
+        console.log(this.state)
     }
 
 
     render() {
-
+        let errorClass = ['']
+        let successClass = ['']
+        if (this.state.error) {
+            errorClass = ['errorText']
+        }else{
+            errorClass = ['hidden']
+        }
+        if(this.state.success){
+            successClass =['successClass']
+        }else{
+            successClass =['hidden']
+        }
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
             formElementsArray.push({
@@ -278,17 +280,26 @@ class Form extends Component {
                 <div className="container formDiv" >
                     <h2 className="formTitle color1" >فرم زیر را کامل کنید </h2>
                     {form}
-                    <button className="sendBtn" onClick={this.fileUpload}  >{this.state.progressPercent ? '% ' + this.state.progressPercent  : 'بزن داچ'} </button>
-                    <button 
-                            className="sendBtn" 
-                            onClick={this.fileUpload} 
-                            style={{
-                                'width' : this.state.progressPercent + '%'
-                            }}>
-                    </button>
-                    {this.state.loading ? <div class="loader"></div> : '' }
-                    
-                    
+                    <div>
+                        {this.state.loading ?
+                            <div className="loadingBox" >
+                                <div className="loader">
+                                </div>
+                                <div className="loadingPercent" >{'% ' + this.state.progressPercent}
+                                    <p>منتظر بمانید</p>
+                                </div>
+
+                            </div>
+                            : ''}
+                        {
+                            !this.error ? <div className={errorClass.join(' ')} > {this.state.errorText}  </div> : ''
+                        }
+                        {
+                            !this.success ? <div className={successClass.join(' ')} > {this.state.successText}  </div> : ''
+                        }
+                    </div>
+
+
 
                     {/* <span className={validationText.join(' ')} >{this.state.emtyField} را پر نکرده اید </span> */}
                 </div>
