@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Home from './Components/Home'
-import {  BrowserRouter as  Router , Route } from 'react-router-dom';
+import {  BrowserRouter as  Router , Switch , Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <Router >
         <div className="bgGradient" >
-          <Route exact path="/" component={Home} />
-          <Route  path="/Home" component={Home} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+          </Switch>
         </div>
 
       </Router>

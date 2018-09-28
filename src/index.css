@@ -130,6 +130,9 @@ body {
 .color3{
   color: rgb(112, 153, 0);
 }
+.color4{
+	color: #0daeab;
+}
 .bgColor1{
   background-color: #333;
 }
@@ -139,10 +142,13 @@ body {
 .bgColor3{
   background-color: #eaeaea;
 }
+.bgColor4{
+	background-color: #0daeab;
+}
 .container{
   max-width: 1200px;
   margin: auto;
-  padding: 40px;
+  padding: 30px;
 }
 .menu{
   display: flex;
@@ -160,14 +166,17 @@ body {
 }
 
 .logoImg{
-  width: 100px;
+  width: 60px;
 }
 .navLink{
 	transition: all .3s linear;
 }
 .navLink:hover{
-	color: #B3A159;
+	color: #0daeab;
 	transition: all .3s linear;
+}
+.active{
+	color: #0daeab;
 }
 
 /* =============================FORM=============== */
@@ -191,23 +200,24 @@ body {
     margin-bottom: 40px;
     cursor: pointer;
     border-radius: 4px;
-    background: #B3A159;
+    background: #0daeab;
 	font-size: 13px;
 	font-weight: 400;
     transition: all .3s linear;
-    color: #fff;
+	color: #fff;
+	margin-top: 20px;
+    margin-bottom: 20px;
 }
 .sendBtn:hover{
-	background-color: #b3a159cc;
+	background-color: #0daeabcc;
 	transition: all .3s linear;
 }
 .formTitle{
 	margin: auto;
     text-align: center;
     font-weight: 400;
-    margin-bottom: 70px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #b6b6b6;
     max-width: 300px;
 }
 
@@ -215,11 +225,22 @@ body {
 /* ==========================input======================= */
 
 .Input {
-	width: 100%;
-	padding: 10px 0px;
-	box-sizing: border-box;
+    width: 100%;
+    padding: 5px 0px;
+    box-sizing: border-box;
+    margin: auto;
 }
-
+.InputFile{
+	width: 100%;
+}
+.formInputFile{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    padding: 5px 0px;
+}
 .Label {
 	font-weight: bold;
 	display: block;
@@ -242,7 +263,7 @@ body {
 	max-width: 80%;
 }
 *::placeholder{
-	color: #B3A159;
+	color: #0daeab;
 }
 textarea{
 	min-height:150px;
@@ -259,28 +280,33 @@ textarea{
 	border: 1px solid red;
 	background-color: #FDA49A;
 }
-.InvalidFile{
-}
+
 .fileInput{
-	width: 80%;
+    min-width: 200px;
     background-color: #f5f5f5;
-	margin: auto;
-	position: relative;
-	overflow: hidden;
-	text-align: center;
-	height: 50px;
-	line-height: 50px;
-	border-radius: 4px;
-	font-size: 13px;
-	font-weight: 400;
-	transition: all .3s linear;
-	color: #B3A159;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all .3s linear;
+    color: #0daeab;
+    width: 100%;
 }
 .fileInput:hover{
 	background-color: #ddd;
 	transition: all .3s linear;
 
 }
+.fileBox{
+	width: 25%;
+    float: right;
+}
+
 .fileInputٰValid{
 	width: 80%;
 	background-color: #d9ebd1;
@@ -307,6 +333,7 @@ textarea{
 }
 .formDiv{
 	position: relative;
+	padding: 0px
 }
 .validationText{
 	position: absolute;
@@ -345,6 +372,66 @@ textarea{
 	transition: all .3s linear;
 }
 
+.svg-inline--fa.fa-w-12 , .svg-inline--fa.fa-w-16{
+    margin: 0px 10px;
+    width: 20px;
+    overflow: visible;
+    height: 20px;
+}
+.myIcon{
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+ 
+
+
+/* ======================loading ====================== */
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+}
+.loader {
+  margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: .5em solid rgba(13,197,193, 0.2);
+  border-right: .5em solid rgba(13,197,193, 0.2);
+  border-bottom: .5em solid rgba(13,197,193, 0.2);
+  border-left: .5em solid #0dc5c1;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 .5s infinite linear;
+  animation: load8 .5s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+
 
 /* ================footer ================ */
 
@@ -353,6 +440,3 @@ textarea{
 height: 80px;
 }
 
-.zz{
-	display: flex;
-}

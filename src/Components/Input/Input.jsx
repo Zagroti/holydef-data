@@ -1,44 +1,38 @@
 import React from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas, faMusic, faImage, faFileVideo } from '@fortawesome/free-solid-svg-icons'
 
+library.add(faMusic, fas, faImage, faFileVideo)
 
-const input = ( props ) => {
+const input = (props) => {
     let inputElement = null;
+    let inputElementFile = null
     const inputClasses = ['InputElement'];
 
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push('Invalid');
     }
 
-    switch ( props.elementType ) {
-        case ( 'input' ):
+    switch (props.elementType) {
+        case ('input'):
             inputElement = <input
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
-                onChange={props.changed} 
-                required/>;
+                onChange={props.changed}
+                required />;
             break;
-        case ( 'textarea' ):
+        case ('textarea'):
             inputElement = <textarea
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
-                onChange={props.changed} 
-                required/>;
+                onChange={props.changed}
+                required />;
             break;
-        case ( 'file' ):
-            inputElement = 
-            <div className={ props.invalid ? 'fileInput' : 'fileInputٰValid' } >
-                {props.value ? props.value : <span>{props.elementConfig.name}  مورد نظر را انتخاب کنید</span> } 
-                <input
-                    className={'fileInputField'}
-                    {...props.elementConfig}
-                    value={props.value}
-                    onChange={props.changed}
-                     />
-            </div>
-            break;
-        case ( 'select' ):
+
+        case ('select'):
             inputElement = (
                 <select
                     className={inputClasses.join(' ')}
@@ -53,17 +47,48 @@ const input = ( props ) => {
             );
             break;
         default:
-            inputElement = <input
-                className={inputClasses.join(' ')}
-                {...props.elementConfig}
-                value={props.value}
-                onChange={props.changed} />;
+            inputElement = null
     }
-
+    let myIcon = null;
+    if (props.elementConfig.name === 'فایل صوتی') {
+        myIcon = faMusic;
+    } else if (props.elementConfig.name === 'ویدیو') {
+        myIcon = faFileVideo;
+    } else {
+        myIcon = faImage;
+    }
+    if (props.elementType === 'file') {
+        inputElementFile =
+            <div className={'fileInput'} >
+                {props.value ? props.value :
+                    <span className="myIcon">
+                        <FontAwesomeIcon className="DLIcon" icon={myIcon} />
+                        {props.elementConfig.name}
+                    </span>
+                }
+                <input
+                    className={'fileInputField'}
+                    {...props.elementConfig}
+                    value={props.value}
+                    onChange={props.changed}
+                />
+            </div>
+    }
     return (
-        <div className={'Input'}>
-            <label className={'Label'}>{props.label}</label>
-            {inputElement}
+        <div >
+
+
+            {props.elementType !== 'file' ?
+                <div className={'Input'}>
+                    {inputElement}
+                </div> :
+
+                <div className={'InputFile'}>
+                    {inputElementFile}
+                </div>
+            }
+
+
         </div>
     );
 
