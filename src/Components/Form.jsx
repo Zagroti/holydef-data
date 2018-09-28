@@ -12,12 +12,18 @@ class Form extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        { value: 'one', displayValue: 'یک' },
-                        { value: 'two', displayValue: 'دو' },
-                        { value: 'three', displayValue: 'سه' },
-                        { value: 'four', displayValue: 'چهار' },
-                        { value: 'five', displayValue: 'پنج' },
-                        { value: 'six', displayValue: 'شش' }
+                        { value: '1', displayValue: 'تاریخ دفاع مقدس' },
+                        { value: '2', displayValue: 'عملیات ها' },
+                        { value: '3', displayValue: 'سرداران دفاع مقدس' },
+                        { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
+                        { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
+                        { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
+                        { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
+                        { value: '8', displayValue: 'جغرافیا دفاع مقدس' },
+                        { value: '9', displayValue: 'نقش مردم در دفاع مقدس' },
+                        { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
+                        { value: '11', displayValue: 'آزادگان و جانبازان' },
+                        { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
                     ]
                 },
                 value: '',
