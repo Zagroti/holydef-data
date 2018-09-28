@@ -217,12 +217,13 @@ class Form extends Component {
                 res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
             })
             .catch(err => {
-                this.setState({ error: true, errorText: 'دوباره امتحان کنید ' })
+                this.setState({ error: true, errorText: 'خطا در انجام عملیت، لطفا دوباره امتحان کنید' })
 
             })
         console.log(this.state)
     }
 
+ 
 
     render() {
         let errorClass = ['']
