@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Input from '../Components/Input/Input'
 import axios from '../axios';  // set base URL from axios --->
-
 
 
 class Form extends Component {
@@ -12,18 +11,18 @@ class Form extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        { value: '1', displayValue: 'تاریخ دفاع مقدس' },
-                        { value: '2', displayValue: 'عملیات ها' },
-                        { value: '3', displayValue: 'سرداران دفاع مقدس' },
-                        { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
-                        { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
-                        { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
-                        { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
-                        { value: '8', displayValue: 'جغرافیا دفاع مقدس' },
-                        { value: '9', displayValue: 'نقش مردم در دفاع مقدس' },
-                        { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
-                        { value: '11', displayValue: 'آزادگان و جانبازان' },
-                        { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
+                        {value: '1', displayValue: 'تاریخ دفاع مقدس'},
+                        {value: '2', displayValue: 'عملیات ها'},
+                        {value: '3', displayValue: 'سرداران دفاع مقدس'},
+                        {value: '4', displayValue: 'ستاد مشترک دفاع مقدس'},
+                        {value: '5', displayValue: 'دفاع مقدس در آیینه هنر'},
+                        {value: '6', displayValue: 'دستاورد های دفاع مقدس'},
+                        {value: '7', displayValue: 'ناگفته های دفاع مقدس'},
+                        {value: '8', displayValue: 'جغرافیا دفاع مقدس'},
+                        {value: '9', displayValue: 'نقش مردم در دفاع مقدس'},
+                        {value: '10', displayValue: 'بانک مقالات و پایان نامه ها'},
+                        {value: '11', displayValue: 'آزادگان و جانبازان'},
+                        {value: '12', displayValue: 'گاه شمار دفاع مقدس'},
                     ]
                 },
                 value: '',
@@ -124,7 +123,7 @@ class Form extends Component {
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        this.setState({ orderForm: updatedOrderForm });
+        this.setState({orderForm: updatedOrderForm});
 
     }
 
@@ -140,7 +139,7 @@ class Form extends Component {
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        this.setState({ orderForm: updatedOrderForm });
+        this.setState({orderForm: updatedOrderForm});
 
         if (event.target.name === 'عکس') {
             this.setState({
@@ -161,7 +160,6 @@ class Form extends Component {
     }
 
 
-
     checkValidity(value, rules) {
         let isValid = true;
         if (!rules) {
@@ -175,7 +173,7 @@ class Form extends Component {
 
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({ error: false, success: false })
+        this.setState({error: false, success: false})
         console.log(this.state)
 
         var bodyFormData = new FormData();
@@ -190,53 +188,56 @@ class Form extends Component {
             onUploadProgress: progressBar => {
                 let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
                 if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
-                    this.setState({ progressPercent: progressPercent })
+                    this.setState({progressPercent: progressPercent})
                 } else {
-                    this.setState({ progressPercent: null })
+                    this.setState({progressPercent: null})
                 }
-                (progressPercent !== 100 || progressPercent !== null) ? this.setState({ loading: true }) : this.setState({ loading: false })
+                (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
             }
         })
             .then(res => {
-                this.setState({ success: true,
-                                successText: 'عملیات با موفقیت انجام شد',
-                                errorText: '' ,
-                                loading: false })
-                                
-                res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
+                this.setState({
+                    success: true,
+                    successText: 'عملیات با موفقیت انجام شد',
+                    errorText: '',
+                    loading: false
+                })
+
+                res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
             })
             .catch(err => {
-                this.setState({ error: true, 
-                                errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
-                                successText: ' ',
-                                loading: false })
+                this.setState({
+                    error: true,
+                    errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
+                    successText: ' ',
+                    loading: false
+                })
 
             })
     }
-
 
 
     render() {
         let errorClass = ['']
         let successClass = ['']
         // --- set class for state of error handeling ---
-            if (this.state.error) {
-                errorClass = ['errorText']
-            } else {
-                errorClass = ['hidden']
-            }
-            if (this.state.success) {
-                successClass = ['successClass']
-            } else {
-                successClass = ['hidden']
-            }
-            const formElementsArray = [];
-            for (let key in this.state.orderForm) {
-                formElementsArray.push({
-                    id: key,
-                    config: this.state.orderForm[key]
-                });
-            }
+        if (this.state.error) {
+            errorClass = ['errorText']
+        } else {
+            errorClass = ['hidden']
+        }
+        if (this.state.success) {
+            successClass = ['successClass']
+        } else {
+            successClass = ['hidden']
+        }
+        const formElementsArray = [];
+        for (let key in this.state.orderForm) {
+            formElementsArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            });
+        }
 
         // --- create form elemnt of main page *Input * Button *Uploader * ... ----
         let form = (
@@ -265,38 +266,41 @@ class Form extends Component {
                             invalid={!formElement.config.valid}
                             shouldValidate={formElement.config.validation}
                             touched={formElement.config.touched}
-                            changed={(event) => { this.selectHandler(event, formElement.id) }}
+                            changed={(event) => {
+                                this.selectHandler(event, formElement.id)
+                            }}
                         /> : null
                     ))}
                 </div>
 
 
-                <button className="sendBtn" >ارسال </button>
+                <button className="sendBtn">ارسال</button>
             </form>
 
 
         );
         return (
             <div>
-                <div className="container formDiv" >
-                    <h2 className="formTitle color1" >سامانه درج محتوا</h2>
+                <div className="container formDiv">
+                    <h2 className="formTitle color1">سامانه درج محتوا</h2>
                     {form}
                     <div>
                         {this.state.loading ?
-                            <div className="loadingBox" >
+                            <div className="loadingBox">
                                 <div className="loader">
                                 </div>
-                                <div className="loadingPercent" >{'% ' + this.state.progressPercent}
+                                <div className="loadingPercent">{'% ' + this.state.progressPercent}
                                     <p>منتظر بمانید</p>
                                 </div>
 
                             </div>
                             : ''}
                         {
-                            !this.error ? <div className={errorClass.join(' ')} > {this.state.errorText}  </div> : ''
+                            !this.error ? <div className={errorClass.join(' ')}> {this.state.errorText}  </div> : ''
                         }
                         {
-                            !this.success ? <div className={successClass.join(' ')} > {this.state.successText}  </div> : ''
+                            !this.success ?
+                                <div className={successClass.join(' ')}> {this.state.successText}  </div> : ''
                         }
                     </div>
                 </div>
