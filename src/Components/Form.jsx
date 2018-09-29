@@ -157,24 +157,37 @@ class Form extends Component {
     }
 
 
-    selectHandler = event => {
+    selectHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+        this.setState({ orderForm: updatedOrderForm });
+
         // TODO checking latter and delete any consol
         console.log(event.target)
 
         if (event.target.name === 'عکس') {
             this.setState({
-                image: event.target.files[0]
+                image: event.target.files[0] || ''
             })
         } else if (event.target.name === 'ویدیو') {
             this.setState({
-                video: event.target.files[0]
+                video: event.target.files[0] || ''
             })
         } else if (event.target.name === 'فایل صوتی') {
             this.setState({
-                audio: event.target.files[0]
+                audio: event.target.files[0] || ''
             })
         }
-        console.log(this.state) // TODO delete latter
+        console.log(this.state.audio) // TODO delete latter
     }
 
 
@@ -192,6 +205,8 @@ class Form extends Component {
     
     orderHandler = (event) => {
         event.preventDefault();
+        this.setState({error : false , success : false})
+
         
         var bodyFormData = new FormData();
         bodyFormData.append('title', this.state.orderForm.title.value);
@@ -204,25 +219,22 @@ class Form extends Component {
         axios.post('api/v1/article/25', bodyFormData, {
             onUploadProgress: progressBar => {
                 let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                console.log(progressBar) // TODO Delete lattetr
-
                     if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
                         this.setState({ progressPercent: progressPercent })
                     } else {
                         this.setState({ progressPercent: null })
                     }
-                     progressPercent !== 100 || progressPercent === null ? this.setState({ loading: true }) : this.setState({ loading: false })
+                     (progressPercent !== 100 || progressPercent !== null) ? this.setState({ loading: true }) : this.setState({ loading: false })
             }
         })
             .then(res => {
-                this.setState({ success: true, successText: 'عملیات با موفقیت انجام شد' })
+                this.setState({ success: true, successText: 'عملیات با موفقیت انجام شد',  loading: false })
                 res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
             })
             .catch(err => {
-                this.setState({ error: true, errorText: 'خطا در انجام عملیت، لطفا دوباره امتحان کنید' })
+                this.setState({ error: true, errorText: 'خطا در انجام عملیت، لطفا دوباره امتحان کنید' ,  loading: false })
 
             })
-        console.log(this.state) // TODO delete latter
     }
 
    
@@ -276,7 +288,7 @@ class Form extends Component {
                             invalid={!formElement.config.valid}
                             shouldValidate={formElement.config.validation}
                             touched={formElement.config.touched}
-                            changed={this.selectHandler}
+                            changed={(event)=>{this.selectHandler(event , formElement.id)}}
                         /> : null
                     ))}
                 </div>
