@@ -25,7 +25,7 @@ class Form extends Component {
                         {value: '12', displayValue: 'گاه شمار دفاع مقدس'},
                     ]
                 },
-                value: '',
+                value: '1',
                 validation: {},
                 valid: true
             },
