@@ -337,7 +337,7 @@ textarea{
 	color: transparent;
 	font-size: 0;
 	height: 100px;
-	width: 100%;
+	width: 300px;
 	position: absolute;
 	top: -6px;
 	left: 0;
@@ -444,7 +444,7 @@ textarea{
 }
 .loadingPercent{
     position: fixed;
-    top: 46%;
+    top: 50%;
     left: 48.4vw;
     font-size: 12px;
     padding: 0px 3px;
@@ -525,4 +525,51 @@ textarea{
 .blueBorder{
 	border: 1px solid;
 	border-color: #077c7a;
+}
+
+
+@media only screen and (max-width: 800px) {
+
+	.formInputFile{
+		flex-direction: column;
+	}
+	.fileInput{
+		width: 100%;
+		margin: 5px 0px;
+	}
+	.sendBtn{
+		width: 80%;
+	}
+	.loader{
+		left: 44vw;
+	}
+	.loadingPercent{
+		left: 42.4vw;
+	}
+
+
+}
+@media only screen and (max-width: 400px) {
+	.sendBtn{
+		width: 90%;
+	}
+	.InputElement{
+		min-width: unset;
+		max-width: unset;
+		width: 90%;
+	}
+	.formInputFile{
+		width: 90%;
+	}
+	.loader{
+		left: 41vw;
+	}
+	.loadingPercent{
+		left: 39.4vw;
+	}
+
+
+
+
+
 }

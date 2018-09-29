@@ -63,9 +63,6 @@ class Form extends Component {
                     placeholder: 'توضیحات بلند'
                 },
                 value: '',
-                validation: {
-                    required: true,
-                },
                 valid: false,
                 touched: false
             },
@@ -77,11 +74,6 @@ class Form extends Component {
                     name: 'عکس'
                 },
                 value: '',
-                binaty: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
             },
             video: {
                 elementType: 'file',
@@ -91,10 +83,6 @@ class Form extends Component {
                     name: 'ویدیو'
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
             },
             audio: {
                 elementType: 'file',
@@ -104,10 +92,6 @@ class Form extends Component {
                     name: 'فایل صوتی'
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
             },
         },
         formIsValid: false,
@@ -143,19 +127,6 @@ class Form extends Component {
         this.setState({ orderForm: updatedOrderForm });
 
     }
-    inputChangedHandlerFile = (event, inputIdentifier) => {
-        const updatedOrderForm = {
-            ...this.state.orderForm
-        };
-        const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
-        };
-        updatedFormElement.value = event.target.value;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
-
-        this.setState({ orderForm: updatedOrderForm });
-    }
-
 
     selectHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
@@ -171,23 +142,22 @@ class Form extends Component {
 
         this.setState({ orderForm: updatedOrderForm });
 
-        // TODO checking latter and delete any consol
-        console.log(event.target)
-
         if (event.target.name === 'عکس') {
             this.setState({
                 image: event.target.files[0] || ''
             })
+            console.log(this.state.image)
         } else if (event.target.name === 'ویدیو') {
             this.setState({
                 video: event.target.files[0] || ''
             })
+            console.log(this.state.video)
         } else if (event.target.name === 'فایل صوتی') {
             this.setState({
                 audio: event.target.files[0] || ''
             })
+            console.log(this.state.audio)
         }
-        console.log(this.state.audio) // TODO delete latter
     }
 
 
@@ -202,12 +172,12 @@ class Form extends Component {
         }
         return isValid;
     }
-    
+
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({error : false , success : false})
+        this.setState({ error: false, success: false })
+        console.log(this.state)
 
-        
         var bodyFormData = new FormData();
         bodyFormData.append('title', this.state.orderForm.title.value);
         bodyFormData.append('short_description', this.state.orderForm.short_description.value);
@@ -219,39 +189,46 @@ class Form extends Component {
         axios.post('api/v1/article/25', bodyFormData, {
             onUploadProgress: progressBar => {
                 let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                    if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
-                        this.setState({ progressPercent: progressPercent })
-                    } else {
-                        this.setState({ progressPercent: null })
-                    }
-                     (progressPercent !== 100 || progressPercent !== null) ? this.setState({ loading: true }) : this.setState({ loading: false })
+                if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
+                    this.setState({ progressPercent: progressPercent })
+                } else {
+                    this.setState({ progressPercent: null })
+                }
+                (progressPercent !== 100 || progressPercent !== null) ? this.setState({ loading: true }) : this.setState({ loading: false })
             }
         })
             .then(res => {
-                this.setState({ success: true, successText: 'عملیات با موفقیت انجام شد',  loading: false })
+                this.setState({ success: true,
+                                successText: 'عملیات با موفقیت انجام شد',
+                                errorText: '' ,
+                                loading: false })
+                                
                 res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
             })
             .catch(err => {
-                this.setState({ error: true, errorText: 'خطا در انجام عملیت، لطفا دوباره امتحان کنید' ,  loading: false })
+                this.setState({ error: true, 
+                                errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
+                                successText: ' ',
+                                loading: false })
 
             })
     }
 
-   
+
 
     render() {
         let errorClass = ['']
         let successClass = ['']
-            // --- set class for state of error handeling ---
+        // --- set class for state of error handeling ---
             if (this.state.error) {
                 errorClass = ['errorText']
-            }else{
+            } else {
                 errorClass = ['hidden']
             }
-            if(this.state.success){
-                successClass =['successClass']
-            }else{
-                successClass =['hidden']
+            if (this.state.success) {
+                successClass = ['successClass']
+            } else {
+                successClass = ['hidden']
             }
             const formElementsArray = [];
             for (let key in this.state.orderForm) {
@@ -288,7 +265,7 @@ class Form extends Component {
                             invalid={!formElement.config.valid}
                             shouldValidate={formElement.config.validation}
                             touched={formElement.config.touched}
-                            changed={(event)=>{this.selectHandler(event , formElement.id)}}
+                            changed={(event) => { this.selectHandler(event, formElement.id) }}
                         /> : null
                     ))}
                 </div>
@@ -322,10 +299,6 @@ class Form extends Component {
                             !this.success ? <div className={successClass.join(' ')} > {this.state.successText}  </div> : ''
                         }
                     </div>
-
-
-
-                    {/* <span className={validationText.join(' ')} >{this.state.emtyField} را پر نکرده اید </span> */}
                 </div>
             </div>
         )
