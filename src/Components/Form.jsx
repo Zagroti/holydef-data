@@ -184,7 +184,7 @@ class Form extends Component {
         bodyFormData.append('video', this.state.video, this.state.video.name)
         bodyFormData.append('audio', this.state.audio, this.state.audio.name)
 
-        axios.post('api/v1/article/25', bodyFormData, {
+        axios.post('api/v1/article/' + this.state.orderForm.category.value, bodyFormData, {
             onUploadProgress: progressBar => {
                 let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
                 if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
