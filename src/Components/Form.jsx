@@ -145,17 +145,14 @@ class Form extends Component {
             this.setState({
                 image: event.target.files[0] || ''
             })
-            console.log(this.state.image)
         } else if (event.target.name === 'ویدیو') {
             this.setState({
                 video: event.target.files[0] || ''
             })
-            console.log(this.state.video)
         } else if (event.target.name === 'فایل صوتی') {
             this.setState({
                 audio: event.target.files[0] || ''
             })
-            console.log(this.state.audio)
         }
     }
 
@@ -174,7 +171,6 @@ class Form extends Component {
     orderHandler = (event) => {
         event.preventDefault();
         this.setState({error: false, success: false})
-        console.log(this.state)
 
         var bodyFormData = new FormData();
         bodyFormData.append('title', this.state.orderForm.title.value);
