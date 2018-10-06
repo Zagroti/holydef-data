@@ -128,7 +128,7 @@ body {
   color: #fff;
 }
 .color3{
-  color: rgb(112, 153, 0);
+  color: rgb(150, 150, 150);
 }
 .color4{
 	color: #0daeab;
@@ -198,7 +198,6 @@ body {
 
 .sendBtn{
     width: 400px;
-    margin: auto;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -213,11 +212,17 @@ body {
     transition: all .3s linear;
 	color: #fff;
 	margin-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 .sendBtn:hover{
 	background-color: #0daeabcc;
 	transition: all .3s linear;
+}
+.sendVerfy{
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
+	align-items: center;
 }
 .formTitle{
 	margin: auto;
@@ -469,7 +474,7 @@ textarea{
 	width: 50%;
 	border-radius: 10px;
 	border: 3px solid #E74C3C;
-	animation: error 4s normal forwards linear;
+	animation: error 1s linear;
 }
 .successClass{
 	position: absolute; 
@@ -490,7 +495,35 @@ textarea{
 	border-radius: 10px;
 	border: 3px solid #1D8348;
 	background-color: #28B463;
-	animation: error 4s normal forwards linear;
+	animation: error 1s linear;
+}
+.verfyClass{
+	position: absolute; 
+	left: 0; 
+	right: 0; 
+	margin-left: auto; 
+	margin-right: auto; 
+	top: 40%; 
+	align-self: center;
+	justify-content: center;
+	margin: auto;
+	text-align: center;
+	padding: 2rem 2rem;
+    top: 40%; 
+    font-size: 14px;
+	color: #fff;
+	width: 50%;
+	border-radius: 10px;
+	border: 3px solid rgb(39, 102, 173);
+	background-color: rgb(65, 146, 238);
+	animation: error 1s linear;
+}
+.verfyInput{
+	border: 1px solid grey;
+    height: 50px;
+	border-radius: 5px;
+	padding: 0px 10px;
+	
 }
 .hidden{
 	display: none;
@@ -499,14 +532,8 @@ textarea{
 	0% {
 		opacity: 0
 	}
-	10%{
-		opacity:1
-	}
-	90%{
-		opacity: 1;
-	}
 	100%{
-		opacity: 0
+		opacity:1
 	}
 }
 
@@ -525,6 +552,82 @@ textarea{
 .blueBorder{
 	border: 1px solid;
 	border-color: #077c7a;
+}
+
+
+
+
+
+
+
+
+.dataSelect{
+	margin-top: 30px;
+}
+.dataBox{
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    padding: 20px;
+    box-shadow: 0px 0px 2px 0px #dddddd;
+	border-radius: 5px;
+	font-size: 12px;
+}
+.titleBox{
+	display: flex;
+}
+.dataLabel{
+	font-size: 13px;
+	font-weight: 400;
+	margin-left: 10px;
+	min-width: 90px;
+}
+.dataBtn{
+    width: 80px;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 30px;
+	font-size: 13px;
+	font-weight: 400;
+    transition: all .3s linear;
+	color: #fff;
+	margin: 20px 0px 20px 20px;
+}
+.dataText{
+	
+}
+.dataBtnBox{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.editBtn{
+    background: #0d80ae;
+    transition: all .3s linear;
+}
+.deleteBtn{
+    background: #c70707;
+    transition: all .3s linear;
+}
+.editBtn:hover{
+    background: #0d80aed2;
+    transition: all .3s linear;
+}
+.deleteBtn:hover{
+	background: #c70707d0;
+    transition: all .3s linear;
+}
+
+.fa-w-16.closeIcon{
+	position: absolute;
+    top: -3px;
+    right: 4px;
+    margin: 0;
+	width: 20px;
+	cursor: pointer;
 }
 
 

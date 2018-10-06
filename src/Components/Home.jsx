@@ -9,8 +9,8 @@ class Home extends Component {
 
             <div>
                 <Navbar />
-                    <Form />
-                        <Footer />
+                <Form />
+                <Footer />
             </div>
         )
 

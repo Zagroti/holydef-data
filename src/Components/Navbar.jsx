@@ -2,7 +2,6 @@ import React , {Component} from 'react'
 import logo from '../Assets/images/logo.png'
 import {NavLink } from 'react-router-dom';
 
-
 class Navbar extends Component {
 render() {
     return (
@@ -19,7 +18,7 @@ render() {
                         <NavLink className="navLink color1" exact activeclassname={"active"} to={"/"}>   خانه </NavLink>    
                     </li>
                     <li className="menuUlLi" >
-                        <NavLink className="navLink color1" activeclassname={"active"} to={"/ContactUs"}>  تماس با ما </NavLink>
+                        <NavLink className="navLink color1" activeclassname={"active"} to={"/edit-data"}>  ویرایش </NavLink>
                     </li>
                 </ul>
             </div>

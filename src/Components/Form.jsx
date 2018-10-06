@@ -1,7 +1,12 @@
-import React, {Component} from 'react'
+import React, {   Component} from 'react'
+import ReactDOM from 'react-dom';
 import Input from '../Components/Input/Input'
 import axios from '../axios';  // set base URL from axios --->
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
+library.add(faWindowClose, fas)
 
 class Form extends Component {
 
@@ -108,7 +113,9 @@ class Form extends Component {
         error: false,
         errorText: '',
         success: false,
-        successText: ''
+        successText: '',
+        verfy: false,
+        vefryShow: false
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -180,53 +187,99 @@ class Form extends Component {
         bodyFormData.append('video', this.state.video, this.state.video.name)
         bodyFormData.append('audio', this.state.audio, this.state.audio.name)
 
-        axios.post('api/v1/article/' + this.state.orderForm.category.value, bodyFormData, {
-            onUploadProgress: progressBar => {
-                let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                if (this.state.image.name !== null || this.state.video.name !== null || this.state.audio.name !== null) {
-                    this.setState({progressPercent: progressPercent})
-                } else {
-                    this.setState({progressPercent: null})
+        if(this.state.verfy){
+            axios({
+                method: 'post',
+                url: 'api/v1/article/' + this.state.orderForm.category.value ,
+                data : bodyFormData,            
+                onUploadProgress: progressBar => {
+                    let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
+                    console.log(progressPercent)
+                    if (this.state.image.name !== null ||
+                        this.state.video.name !== null || 
+                        this.state.audio.name !== null || 
+                        this.state.orderForm.title.value !== '' || 
+                        this.state.orderForm.short_description.value || 
+                        this.state.orderForm.description !== '') {
+    
+                        this.setState({progressPercent: progressPercent})
+                    } else{
+                        this.setState({progressPercent: null})
+                    }
+                    (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
                 }
-                (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
-            }
-        })
-            .then(res => {
-                this.setState({
-                    success: true,
-                    successText: 'عملیات با موفقیت انجام شد',
-                    errorText: '',
-                    loading: false
-                })
-
-                res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
+                
             })
-            .catch(err => {
-                this.setState({
-                    error: true,
-                    errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
-                    successText: ' ',
-                    loading: false
+                .then(res => {
+                    this.setState({
+                        success: true,
+                        successText: 'عملیات با موفقیت انجام شد',
+                        errorText: '',
+                        loading: false
+                    })
+    
+                    res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
                 })
+                .catch(err => {
+                    this.setState({
+                        error: true,
+                        errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
+                        successText: ' ',
+                        loading: false
+                    })
+    
+                })
+            
+                this.setState({verfyShow: false})
+        }
+        
+        let verfyValue =  ReactDOM.findDOMNode(this.refs.mymy).value
+        if(!this.state.verfy){
+            this.setState({verfyShow : true})
 
-            })
+        }
     }
 
+
+    // verfication CODE Handler
+    verficationCodeHandler = (event) => {
+        if(event.target.value === '1111' ){
+            console.log('yes')
+            this.setState({verfy : true , vefryShow:false})
+            console.log(this.state.vefryShow)
+        }
+    }   
+
+    // close success and error MESSAGE WINDOW 
+    close = () =>{
+        this.setState({error : false , success: false , vefryShow: false })
+        console.log(this.state.vefryShow)
+    }
 
     render() {
         let errorClass = ['']
         let successClass = ['']
+        let verfyClass = ['']
+
         // --- set class for state of error handeling ---
         if (this.state.error) {
             errorClass = ['errorText']
         } else {
             errorClass = ['hidden']
         }
+
         if (this.state.success) {
             successClass = ['successClass']
         } else {
             successClass = ['hidden']
         }
+
+        if(this.state.verfyShow){
+            verfyClass = ['verfyClass']
+        }else{
+            verfyClass = ['hidden']
+        }
+
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
             formElementsArray.push({
@@ -269,8 +322,10 @@ class Form extends Component {
                     ))}
                 </div>
 
-
-                <button className="sendBtn">ارسال</button>
+                <div className="sendVerfy">
+                    <button className="sendBtn">ارسال</button>
+                    <input type="text" className="verfyInput" ref="mymy" onChange={(event)=>this.verficationCodeHandler(event)} />
+                </div>
             </form>
 
 
@@ -292,11 +347,22 @@ class Form extends Component {
                             </div>
                             : ''}
                         {
-                            !this.error ? <div className={errorClass.join(' ')}> {this.state.errorText}  </div> : ''
+                            !this.error ? 
+                                <div className={errorClass.join(' ')}> {this.state.errorText}
+                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} />
+                                </div> : ''
                         }
                         {
                             !this.success ?
-                                <div className={successClass.join(' ')}> {this.state.successText}  </div> : ''
+                                <div className={successClass.join(' ')}> {this.state.successText} 
+                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                </div> : ''
+                        }
+                        {
+                            !this.verfy ?
+                            <div className={verfyClass.join(' ')}> کد امنیتی را وارد کنید 
+                                <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                            </div> : ''
                         }
                     </div>
                 </div>

@@ -5,7 +5,7 @@ class Footer extends Component {
         return (
             <div>
                 <div className="footer bgColor1">
-
+                        
                 </div>
             </div>
         )
