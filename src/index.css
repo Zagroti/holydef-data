@@ -202,8 +202,6 @@ body {
     text-align: center;
     justify-content: center;
     height: 50px;
-    margin-top: 60px;
-    margin-bottom: 40px;
     cursor: pointer;
     border-radius: 30px;
     background: #0daeab;
@@ -211,8 +209,7 @@ body {
 	font-weight: 400;
     transition: all .3s linear;
 	color: #fff;
-	margin-top: 20px;
-    margin-bottom: 20px;
+	margin: 20px;
 }
 .sendBtn:hover{
 	background-color: #0daeabcc;
@@ -519,7 +516,7 @@ textarea{
 	animation: error 1s linear;
 }
 .verfyInput{
-	border: 1px solid grey;
+	border: 1px solid #0daeab;
     height: 50px;
 	border-radius: 5px;
 	padding: 0px 10px;
@@ -536,7 +533,9 @@ textarea{
 		opacity:1
 	}
 }
-
+.myb{
+	border: 1px solid red;
+}
 /* ================footer ================ */
 
 

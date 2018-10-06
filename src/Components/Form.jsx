@@ -210,34 +210,35 @@ class Form extends Component {
                 }
                 
             })
-                .then(res => {
-                    this.setState({
-                        success: true,
-                        successText: 'عملیات با موفقیت انجام شد',
-                        errorText: '',
-                        loading: false
-                    })
-    
-                    res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
+            .then(res => {
+                this.setState({
+                    success: true,
+                    successText: 'عملیات با موفقیت انجام شد',
+                    errorText: '',
+                    loading: false
                 })
-                .catch(err => {
-                    this.setState({
-                        error: true,
-                        errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
-                        successText: ' ',
-                        loading: false
-                    })
-    
+
+                res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
+            })
+            .catch(err => {
+                this.setState({
+                    error: true,
+                    errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
+                    successText: ' ',
+                    loading: false
                 })
+
+            })
             
-                this.setState({verfyShow: false})
+            // this.setState({verfyShow: false})
         }
         
-        let verfyValue =  ReactDOM.findDOMNode(this.refs.mymy).value
         if(!this.state.verfy){
-            this.setState({verfyShow : true})
-
+            // ReactDOM.findDOMNode(this.refs.xx).className.join('verfyClass')
+            this.nameInput.focus();
+            this.nameInput.style.border = '1px solid #dc3545'
         }
+        
     }
 
 
@@ -247,6 +248,9 @@ class Form extends Component {
             console.log('yes')
             this.setState({verfy : true , vefryShow:false})
             console.log(this.state.vefryShow)
+            this.nameInput.style.border = '1px solid #28a745'
+        }else{
+            this.nameInput.style.border = '1px solid #dc3545'         
         }
     }   
 
@@ -254,6 +258,7 @@ class Form extends Component {
     close = () =>{
         this.setState({error : false , success: false , vefryShow: false })
         console.log(this.state.vefryShow)
+        ReactDOM.findDOMNode(this.refs.xx).className = 'hidden'
     }
 
     render() {
@@ -274,11 +279,11 @@ class Form extends Component {
             successClass = ['hidden']
         }
 
-        if(this.state.verfyShow){
-            verfyClass = ['verfyClass']
-        }else{
-            verfyClass = ['hidden']
-        }
+        // if(this.state.verfyShow){
+        //     verfyClass = ['verfyClass']
+        // }else{
+        //     verfyClass = ['hidden']
+        // }
 
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
@@ -324,7 +329,10 @@ class Form extends Component {
 
                 <div className="sendVerfy">
                     <button className="sendBtn">ارسال</button>
-                    <input type="text" className="verfyInput" ref="mymy" onChange={(event)=>this.verficationCodeHandler(event)} />
+                    <input type="text" className="verfyInput" 
+                           ref={(input) => { this.nameInput = input; }}  
+                           placeholder="کد امنیتی"
+                           onChange={(event)=>this.verficationCodeHandler(event)} />
                 </div>
             </form>
 
@@ -343,13 +351,12 @@ class Form extends Component {
                                 <div className="loadingPercent">{'% ' + this.state.progressPercent}
                                     <p>منتظر بمانید</p>
                                 </div>
-
                             </div>
                             : ''}
                         {
                             !this.error ? 
                                 <div className={errorClass.join(' ')}> {this.state.errorText}
-                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} />
+                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close}  />
                                 </div> : ''
                         }
                         {
@@ -359,8 +366,8 @@ class Form extends Component {
                                 </div> : ''
                         }
                         {
-                            !this.verfy ?
-                            <div className={verfyClass.join(' ')}> کد امنیتی را وارد کنید 
+                            this.state.verfyShow ?
+                            <div className={verfyClass.join(' ')} ref="xx"> کد امنیتی را وارد کنید 
                                 <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
                             </div> : ''
                         }
