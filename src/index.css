@@ -516,11 +516,14 @@ textarea{
 	animation: error 1s linear;
 }
 .verfyInput{
-	border: 1px solid #0daeab;
+    border: 1px solid #ccc;
     height: 50px;
-	border-radius: 5px;
-	padding: 0px 10px;
-	
+    border-radius: 5px;
+    padding: 0px 10px;
+    background-color: whitesmoke;
+}
+.verfyInput:focus{
+	background-color: #ddd;
 }
 .hidden{
 	display: none;
