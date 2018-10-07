@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <Router >
-        <div className="bgGradient" >
+        <div className="bgGradient" style={{paddingBottom : '60px'}} >
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/edit-data" component={EditData} />

@@ -115,7 +115,6 @@ class Form extends Component {
         success: false,
         successText: '',
         verfy: false,
-        vefryShow: false
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -175,6 +174,7 @@ class Form extends Component {
         return isValid;
     }
 
+    // sent button FUNCTION
     orderHandler = (event) => {
         event.preventDefault();
         this.setState({error: false, success: false})
@@ -229,36 +229,30 @@ class Form extends Component {
                 })
 
             })
-            
-            // this.setState({verfyShow: false})
         }
         
         if(!this.state.verfy){
-            // ReactDOM.findDOMNode(this.refs.xx).className.join('verfyClass')
             this.nameInput.focus();
             this.nameInput.style.border = '1px solid #dc3545'
         }
-        
+    
     }
 
 
     // verfication CODE Handler
     verficationCodeHandler = (event) => {
         if(event.target.value === '1111' ){
-            console.log('yes')
-            this.setState({verfy : true , vefryShow:false})
-            console.log(this.state.vefryShow)
-            this.nameInput.style.border = '1px solid #28a745'
+            this.setState({verfy : true })
+            this.nameInput.style.border = '1px solid #0d80aed2'
         }else{
-            this.nameInput.style.border = '1px solid #dc3545'         
+            this.nameInput.style.border = '1px solid #dc3545' 
+            this.setState({verfy : false })
         }
     }   
 
     // close success and error MESSAGE WINDOW 
     close = () =>{
         this.setState({error : false , success: false , vefryShow: false })
-        console.log(this.state.vefryShow)
-        ReactDOM.findDOMNode(this.refs.xx).className = 'hidden'
     }
 
     render() {
@@ -332,7 +326,8 @@ class Form extends Component {
                     <input type="text" className="verfyInput" 
                            ref={(input) => { this.nameInput = input; }}  
                            placeholder="کد امنیتی"
-                           onChange={(event)=>this.verficationCodeHandler(event)} />
+                           onChange={(event)=>this.verficationCodeHandler(event)} 
+                           required/>
                 </div>
             </form>
 

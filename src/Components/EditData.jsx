@@ -4,6 +4,8 @@ import axios from '../axios';  // set base URL from axios --->
 import Navbar from './Navbar'
 import Footer from './Footer'
 import DataBox from './DataBox/DataBox'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+// import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class EditData extends Component {
     state = {
@@ -34,8 +36,8 @@ class EditData extends Component {
         myData:[],
         
         selectedId: 1,
-        token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJhZ2VudCI6ImFuZHJvaWQifQ.xBi4wSpZrzZgJ0WvUj92uGaZ_quWKYcSWlPs2afZ_Zw'
-
+        token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJhZ2VudCI6ImFuZHJvaWQifQ.xBi4wSpZrzZgJ0WvUj92uGaZ_quWKYcSWlPs2afZ_Zw',
+        loading: true,
     }
 
     componentWillMount(){
@@ -48,12 +50,10 @@ class EditData extends Component {
             },
         })
         .then(res =>{
-            this.setState({myData : res.data.data})
-            // console.log('data' , this.state.myData)
+            this.setState({myData : res.data.data , loading: false})
         })
     }
 
-    
 
 
     // select title from select option
@@ -67,32 +67,57 @@ class EditData extends Component {
         updatedFormElement.value = event.target.value;
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedOrderForm});
+        this.setState({orderForm: updatedOrderForm , selectedId : event.target.value , loading: true});
 
-        console.log(event.target.value)
-        this.setState({selectedId : event.target.value})
         axios({
             method: 'get',
             url: 'api/v1/article/' + this.state.selectedId ,
             headers: { 
-                
                 "Authorization": this.state.token,
                 "Accept":"application/json", 
             },
         })
         .then(res =>{
-            this.setState({myData : res.data.data})
-            // console.log('data' , this.state.myData)
+            this.setState({myData : res.data.data , loading: false})
         })
     }
 
     // DELETE data 
-    dataDeleteHandler = () =>{
+    deleteDataHandler = (e , id) =>{
+        console.log( id)
+        confirmAlert({
+            message: 'آیا میخواهید این اطلاعات را حذف کنید ؟',
+            buttons: [
+              {
+                label: 'بله',
+                onClick: () => console.log('حذف شد ')
+              },
+              {
+                label: 'انصراف',
+                onClick: () => console.log('برگشت به صفحه')
+              }
+            ]
+          })
 
     }
 
     // EDIT data
-    dataEditHandler = () =>{
+    editDataHandler = (e , id) =>{
+        console.log( this.props.match.params)
+        confirmAlert({
+            message: 'آیا میخواهید این اطلاعات را ویرایش کنید ؟',
+            buttons: [
+              {
+                label: 'بله',
+                onClick: () => console.log('رفتن به صفحه ویرایش ')
+              },
+              {
+                label: 'انصراف',
+                onClick: () => console.log('برگشت به صفحه')
+              }
+            ]
+          })
+
 
     }
 
@@ -137,8 +162,8 @@ class EditData extends Component {
                                 audio={dataElement.data.audio}
                                 dataId={dataElement.data.id}
                                 selectedId={this.state.selectedId}
-                                dataDeleteHandler={this.dataDeleteHandler()}
-                                dataEditHandler={this.dataEditHandler}
+                                deleteData={(e)=>this.deleteDataHandler(e , dataElement.id)}
+                                editData={(e)=>this.editDataHandler(e , dataElement.id)}
                              />
                         ))}
         </div>
@@ -146,7 +171,6 @@ class EditData extends Component {
         return (
             
             <div>
-
                 <Navbar />
                 <div className="dataSelect">
                     {selectBox}
@@ -155,7 +179,15 @@ class EditData extends Component {
                 <div>
                     {myDataShow}
                 </div>
-
+                {this.state.loading ? 
+                    <div className="loadingBox">
+                        <div className="loader">
+                        </div>
+                        <div className="loadingPercent">
+                            <p>منتظر بمانید</p>
+                        </div>
+                    </div>
+                : ''}
                 <Footer />
             </div>
         )

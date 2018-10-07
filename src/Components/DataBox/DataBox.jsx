@@ -11,7 +11,7 @@ const dataBox = (props) => {
 
 
     return (
-        <div >
+        <div  >
             
             <div className="dataBox">
                 <span>{props.dataId} </span>
@@ -41,8 +41,8 @@ const dataBox = (props) => {
                 </div>
 
                 <div className="dataBtnBox" >
-                    <button className="dataBtn editBtn"   onClick={props.dataEditHandler} >ویرایش</button>
-                    <button className="dataBtn deleteBtn" onClick={props.dataDeleteHandler}>حذف</button>
+                    <button className="dataBtn editBtn"   onClick={props.editData} >ویرایش</button>
+                    <button className="dataBtn deleteBtn" onClick={props.deleteData}>حذف</button>
                 </div>
 
             </div>
