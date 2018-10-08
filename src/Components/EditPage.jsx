@@ -6,9 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faMusic, faImage, faFileVideo ,faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMusic, fas, faImage, faFileVideo)
-
-library.add(faWindowClose, fas)
+library.add(faMusic, fas, faImage, faFileVideo , faWindowClose, fas)
 
 class EditPage extends Component {
 
@@ -30,6 +28,8 @@ class EditPage extends Component {
         catId:null,
         id:null
     }
+
+
     componentWillMount(){
         const myState = this.props.history.location.state
         this.setState({
@@ -58,7 +58,6 @@ class EditPage extends Component {
 
     // sent button FUNCTION
     orderHandler = (event) => {
-
         event.preventDefault();
         this.setState({ error: false, success: false })
 
@@ -84,23 +83,20 @@ class EditPage extends Component {
                         this.state.title !== '' ||
                         this.state.short_description ||
                         this.state.description !== '') {
-
                         this.setState({ progressPercent: progressPercent })
                     } else {
                         this.setState({ progressPercent: null })
                     }
                     (progressPercent !== 100 || progressPercent !== null) ? this.setState({ loading: true }) : this.setState({ loading: false })
                 }
-
             })
-                .then(res => {
+            .then(res => {
                     this.setState({
                         success: true,
                         successText: 'عملیات با موفقیت انجام شد',
                         errorText: '',
                         loading: false
                     })
-
                     res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
                 })
                 .catch(err => {
@@ -110,14 +106,11 @@ class EditPage extends Component {
                         successText: ' ',
                         loading: false
                     })
-
                 })
         }
-
         if (!this.state.verfy) {
             this.nameInput.focus();
         }
-
     }
 
 

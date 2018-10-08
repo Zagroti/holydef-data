@@ -44,7 +44,7 @@ class EditData extends Component {
         edit: false,
     }
 
-    componentDidMount(){
+    componentDidUpdate(){
         axios({
             method: 'get',
             url: 'api/v1/article/' + this.state.selectedId,
@@ -57,6 +57,11 @@ class EditData extends Component {
                 this.setState({ myData: res.data.data, loading: false })
             })
     }
+
+    componentDidUpdate(){
+        
+    }
+
     // select title from select option
     selectHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
@@ -72,17 +77,20 @@ class EditData extends Component {
 
     // select option CLICKED
     clickedValue = () => {
-        axios({
-            method: 'get',
-            url: 'api/v1/article/' + this.state.selectedId,
-            headers: {
-                "Authorization": this.state.token,
-                "Accept": "application/json",
-            },
-        })
-            .then(res => {
-                this.setState({ myData: res.data.data, loading: false })
+        if(this.state.loading){
+            axios({
+                method: 'get',
+                url: 'api/v1/article/' + this.state.selectedId,
+                headers: {
+                    "Authorization": this.state.token,
+                    "Accept": "application/json",
+                },
             })
+                .then(res => {
+                    this.setState({ myData: res.data.data, loading: false })
+                })
+        }
+
     }
 
     // DELETE data 
