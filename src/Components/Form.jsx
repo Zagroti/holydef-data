@@ -317,7 +317,7 @@ class Form extends Component {
                     <button className="sendBtn">ارسال</button>
                     <input type="text" className="verfyInput" 
                            ref={(input) => { this.nameInput = input; }}  
-                           placeholder="کد امنیتی"
+                           placeholder="کد امنیتی را وارد کنید"
                            onChange={(event)=>this.verficationCodeHandler(event)} 
                            required/>
                 </div>
@@ -351,12 +351,6 @@ class Form extends Component {
                                 <div className={successClass.join(' ')}> {this.state.successText} 
                                     <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
                                 </div> : ''
-                        }
-                        {
-                            this.state.verfyShow ?
-                            <div className={verfyClass.join(' ')} ref="xx"> کد امنیتی را وارد کنید 
-                                <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
-                            </div> : ''
                         }
                     </div>
                 </div>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import axios from '../axios';  // set base URL from axios --->
+import Footer from './Footer';
+import Navbar from './Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import Footer from './Footer';
-import Navbar from './Navbar'
+import { fas, faMusic, faImage, faFileVideo ,faWindowClose } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faMusic, fas, faImage, faFileVideo)
 
 library.add(faWindowClose, fas)
 
@@ -174,20 +176,38 @@ class EditPage extends Component {
         let form = (
             <form onSubmit={this.orderHandler}>
                 <div>
-                    <input type="text" className="InputElement" ref={(title) => { this.title = title}} />
-                    <input type="text" className="InputElement" ref={(short_description) => { this.short_description = short_description }} />
-                    <input type="text" className="InputElement" ref={(description) => { this.description = description }} />
-                    <div className="InputElement" >
-                        <input type="file" className="" name="عکس" accept='image/*' onChange={this.changeImage} ref={(image) => { this.image = image }} />
-                        <a target="_blank" href={this.state.image} >{/[^/]*$/.exec(this.state.image)[0]}</a>
+                    <input type="text" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title}} />
+                    <input type="text" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
+                    <textarea type="text" className="InputElement margin20" placeholder="توضیحات بلند" ref={(description) => { this.description = description }} />
+                    <div className="InputElement margin20 editPageInput" >
+                        <div className="fileInput fileInputEdit" >
+                            <span className="myIcon">
+                                <FontAwesomeIcon className="DLIcon" icon={faImage} />
+                            </span>
+                            <span>انتخاب عکس</span>
+                            <input className={'fileInputField '} type="file"  name="عکس" accept='image/*'  onChange={this.changeImage} ref={(image) => { this.image = image }} />
+                        </div>
+                        <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a>
                     </div>
-                    <div className="InputElement" >
-                        <input type="file" className="" name="ویدیو" accept='video/*' onChange={this.changeVideo} ref={(video) => { this.video = video }} />
-                        <a target="_blank" href={this.state.video} >{/[^/]*$/.exec(this.state.video)[0]}</a>
+                    <div className="InputElement margin20 editPageInput" >
+                        <div className="fileInput fileInputEdit" >
+                            <span className="myIcon">
+                                <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
+                            </span>
+                            <span>انتخاب ویدیو</span>
+                            <input className={'fileInputField '} type="file"  name="ویدیو" accept='video/*' onChange={this.changeVideo} ref={(video) => { this.video = video }} />
+                        </div>
+                        <a target="_blank" className="play" href={this.state.video} >پخش فایل ویدیویی</a>
                     </div>
-                    <div className="InputElement" >
-                        <input type="file" className="" name="فایل صوتی" accept='audio/*' onChange={this.changeAudio} ref={(audio) => { this.audio = audio }} />
-                        <a target="_blank" href={this.state.audio} >{/[^/]*$/.exec(this.state.audio)[0]}</a>
+                    <div className="InputElement margin20 editPageInput" >
+                        <div className="fileInput fileInputEdit" >
+                            <span className="myIcon">
+                                <FontAwesomeIcon className="DLIcon" icon={faMusic} />
+                            </span>
+                            <span>انتخاب فایل صوتی</span>
+                            <input className={'fileInputField '} type="file"  name="فایل صوتی" accept='audio/*' onChange={this.changeAudio} ref={(audio) => { this.audio = audio }} />
+                        </div>
+                        <a target="_blank" className="play" href={this.state.audio} >پخش فایل صوتی</a>
                     </div>
                 </div>
 
@@ -195,7 +215,7 @@ class EditPage extends Component {
                     <button className="sendBtn">ارسال</button>
                     <input type="text" className="verfyInput"
                         ref={(input) => { this.nameInput = input}}
-                        placeholder="کد امنیتی"
+                        placeholder="کد امنیتی را واید کنید"
                         onChange={(event) => this.verficationCodeHandler(event)}
                         required />
                 </div>
@@ -231,12 +251,7 @@ class EditPage extends Component {
                                     <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
                                 </div> : ''
                         }
-                        {
-                            this.state.verfyShow ?
-                                <div className={verfyClass.join(' ')} ref="xx"> کد امنیتی را وارد کنید
-                                <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
-                                </div> : ''
-                        }
+
                     </div>
                 </div>
                 <Footer />

@@ -280,6 +280,9 @@ textarea{
 	margin: 10px;
 	resize: none;
 }
+textarea::placeholder{
+	color: #0daeab;
+}
 
 .InputElement:focus {
 	outline: none;
@@ -292,18 +295,18 @@ textarea{
 }
 
 .fileInput{
-    width: 200px;
-    background-color: #f5f5f5;
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-    text-align: center; 
-    line-height:2rem;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 400;
-    transition: all .3s linear;
-    color: #0daeab;
+	width: 200px;
+	background-color: #f5f5f5;
+	margin: auto;
+	position: relative;
+	overflow: hidden;
+	text-align: center; 
+	line-height:2rem;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 400;
+	transition: all .3s linear;
+	color: #0daeab;
 	padding: 0.5rem;
 	border: 2px solid #0daeab;
 	cursor: pointer;
@@ -782,6 +785,24 @@ body.react-confirm-alert-body-element {
 	background-color: #4b4b4b67;
 }
 
+.editPageInput{
+	display: flex;
+	flex-direction: row;
+
+	height: auto;
+	align-items: center;
+}
+.fileInputEdit{
+	margin: unset;
+}
+.play{
+	padding-right: 30px;
+	text-decoration: none;
+	color: #0daeab
+}
+.margin20{
+	margin: 20px auto;
+}
 @media only screen and (max-width: 800px) {
 
 	.formInputFile{
@@ -806,6 +827,12 @@ body.react-confirm-alert-body-element {
 	.verfyInput{
 		width: 80%;
 		text-align: center;
+	}
+	.editPageInput{
+		flex-direction: column;
+	}
+	.play{
+		padding: 30px 0px;
 	}
 }
 
