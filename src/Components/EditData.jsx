@@ -44,6 +44,19 @@ class EditData extends Component {
         edit: false,
     }
 
+    componentDidMount(){
+        axios({
+            method: 'get',
+            url: 'api/v1/article/' + this.state.selectedId,
+            headers: {
+                "Authorization": this.state.token,
+                "Accept": "application/json",
+            },
+        })
+            .then(res => {
+                this.setState({ myData: res.data.data, loading: false })
+            })
+    }
     // select title from select option
     selectHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
@@ -58,7 +71,7 @@ class EditData extends Component {
     }
 
     // select option CLICKED
-    clickedValue = (id) => {
+    clickedValue = () => {
         axios({
             method: 'get',
             url: 'api/v1/article/' + this.state.selectedId,
@@ -170,7 +183,7 @@ class EditData extends Component {
                     elementConfig={formElement.config.elementConfig}
                     value={formElement.config.value}
                     changed={(event) => this.selectHandler(event, formElement.id)}
-                    clicked={this.clickedValue(formElement.config.value)}
+                    clicked={this.clickedValue()}
                 /> : null
             ))}
         </div>

@@ -241,7 +241,7 @@ class Form extends Component {
 
     // verfication CODE Handler
     verficationCodeHandler = (event) => {
-        if(event.target.value === '1111' ){
+        if(event.target.value === '914825' ){
             this.setState({verfy : true })
         }else{
             this.setState({verfy : false })
