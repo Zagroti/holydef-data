@@ -413,8 +413,8 @@ textarea{
   font-size: 10px;
   position: fixed;
   border-top: .5em solid #fff;
-  border-right: .5em solid #fffc;
-  border-bottom: .5em solid #fffc;
+  border-right: .5em solid #fff;
+  border-bottom: .5em solid #fff;
   border-left: .5em solid #0dc5c1;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -599,7 +599,8 @@ textarea{
 	margin: 20px 0px 0px 20px;
 }
 .dataText{
-	
+	max-width: 80%;
+    overflow: hidden;
 }
 .dataBtnBox{
     width: 80%;
@@ -760,8 +761,26 @@ body.react-confirm-alert-body-element {
 	}
   }
 
-  
+/* =======================ٍEDIT page ====================================================== */
 
+.editPage{
+	position: fixed;
+	top: -1000px;
+	transition: all .2s linear;
+	width: 100vw;
+	height: 100vh;
+	z-index: 999;
+	background-color: #4b4b4b67;
+}
+.editPageDown{
+	position: fixed;
+	top: 0;
+	transition: all .2s linear;
+	width: 100vw;
+	height: 100vh;
+	z-index: 999;
+	background-color: #4b4b4b67;
+}
 
 @media only screen and (max-width: 800px) {
 
@@ -782,15 +801,14 @@ body.react-confirm-alert-body-element {
 		left: 42.4vw;
 	}
 	.sendVerfy{
-		flex-direction: column;
+		flex-direction: column-reverse;
 	}
 	.verfyInput{
 		width: 80%;
 		text-align: center;
 	}
-
-
 }
+
 @media only screen and (max-width: 400px) {
 	.sendBtn , 	.verfyInput{
 		width: 90%;

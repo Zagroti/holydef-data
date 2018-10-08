@@ -1,6 +1,6 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faMusic, faImage, faFileVideo } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faMusic, fas, faImage, faFileVideo)
@@ -14,7 +14,7 @@ const dataBox = (props) => {
         <div  >
             
             <div className="dataBox">
-                <span>{props.dataId} </span>
+                {/* <span>{props.dataId} </span> */}
                 <div className="titleBox" >
                     <label className="dataLabel" > عنوان :</label>
                     <p className="dataText color3"  >{props.title} </p>

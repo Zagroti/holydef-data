@@ -1,5 +1,4 @@
 import React, {   Component} from 'react'
-import ReactDOM from 'react-dom';
 import Input from '../Components/Input/Input'
 import axios from '../axios';  // set base URL from axios --->
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -116,6 +115,9 @@ class Form extends Component {
         successText: '',
         verfy: false,
     }
+    componentWillMount(){
+        // console.log(this.props.history.location.pathname)
+    }
 
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedOrderForm = {
@@ -190,7 +192,7 @@ class Form extends Component {
         if(this.state.verfy){
             axios({
                 method: 'post',
-                url: 'api/v1/article/' + this.state.orderForm.category.value ,
+                url: `api/v1/article/${this.state.orderForm.category.value}` ,
                 data : bodyFormData,            
                 onUploadProgress: progressBar => {
                     let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
@@ -208,7 +210,6 @@ class Form extends Component {
                     }
                     (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
                 }
-                
             })
             .then(res => {
                 this.setState({
@@ -233,7 +234,6 @@ class Form extends Component {
         
         if(!this.state.verfy){
             this.nameInput.focus();
-            this.nameInput.style.border = '1px solid #dc3545'
         }
     
     }
@@ -243,9 +243,7 @@ class Form extends Component {
     verficationCodeHandler = (event) => {
         if(event.target.value === '1111' ){
             this.setState({verfy : true })
-            this.nameInput.style.border = '1px solid #0d80aed2'
         }else{
-            this.nameInput.style.border = '1px solid #dc3545' 
             this.setState({verfy : false })
         }
     }   
@@ -272,12 +270,6 @@ class Form extends Component {
         } else {
             successClass = ['hidden']
         }
-
-        // if(this.state.verfyShow){
-        //     verfyClass = ['verfyClass']
-        // }else{
-        //     verfyClass = ['hidden']
-        // }
 
         const formElementsArray = [];
         for (let key in this.state.orderForm) {

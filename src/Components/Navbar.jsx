@@ -15,7 +15,7 @@ render() {
                 </div>
                 <ul className="menuUl">
                     <li className="menuUlLi">
-                        <NavLink className="navLink color1" exact activeclassname={"active"} to={"/"}>   خانه </NavLink>    
+                        <NavLink className="navLink color1" exact activeclassname={"active"} to={"/"}>   درج محتوا </NavLink>    
                     </li>
                     <li className="menuUlLi" >
                         <NavLink className="navLink color1" activeclassname={"active"} to={"/edit-data"}>  ویرایش </NavLink>

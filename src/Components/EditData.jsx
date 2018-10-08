@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Input from '../Components/Input/Input'
 import axios from '../axios';  // set base URL from axios --->
 import Navbar from './Navbar'
 import Footer from './Footer'
 import DataBox from './DataBox/DataBox'
 import { confirmAlert } from 'react-confirm-alert'; // Import
-// import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+
 
 class EditData extends Component {
     state = {
@@ -14,47 +14,35 @@ class EditData extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        {value: '1', displayValue: 'تاریخ دفاع مقدس'},
-                        {value: '2', displayValue: 'عملیات ها'},
-                        {value: '3', displayValue: 'سرداران دفاع مقدس'},
-                        {value: '4', displayValue: 'ستاد مشترک دفاع مقدس'},
-                        {value: '5', displayValue: 'دفاع مقدس در آیینه هنر'},
-                        {value: '6', displayValue: 'دستاورد های دفاع مقدس'},
-                        {value: '7', displayValue: 'ناگفته های دفاع مقدس'},
-                        {value: '8', displayValue: 'جغرافیا دفاع مقدس'},
-                        {value: '9', displayValue: 'نقش مردم در دفاع مقدس'},
-                        {value: '10', displayValue: 'بانک مقالات و پایان نامه ها'},
-                        {value: '11', displayValue: 'آزادگان و جانبازان'},
-                        {value: '12', displayValue: 'گاه شمار دفاع مقدس'},
+                        { value: '1', displayValue: 'تاریخ دفاع مقدس' },
+                        { value: '2', displayValue: 'عملیات ها' },
+                        { value: '3', displayValue: 'سرداران دفاع مقدس' },
+                        { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
+                        { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
+                        { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
+                        { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
+                        { value: '8', displayValue: 'جغرافیا دفاع مقدس' },
+                        { value: '9', displayValue: 'نقش مردم در دفاع مقدس' },
+                        { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
+                        { value: '11', displayValue: 'آزادگان و جانبازان' },
+                        { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
                     ]
                 },
                 value: '1',
-                validation: {},
-                valid: true
             }
         },
-        myData:[],
-        
+        myData: [],
+        title:'',
+        short_description:'',
+        description:'',
+        image:'',
+        video:'',
+        audio:'',
         selectedId: 1,
-        token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJhZ2VudCI6ImFuZHJvaWQifQ.xBi4wSpZrzZgJ0WvUj92uGaZ_quWKYcSWlPs2afZ_Zw',
+        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJhZ2VudCI6ImFuZHJvaWQifQ.xBi4wSpZrzZgJ0WvUj92uGaZ_quWKYcSWlPs2afZ_Zw',
         loading: true,
+        edit: false,
     }
-
-    componentWillMount(){
-        axios({
-            method: 'get',
-            url: 'api/v1/article/' + this.state.selectedId ,
-            headers: { 
-                "Authorization": this.state.token,
-                "Accept":"application/json", 
-            },
-        })
-        .then(res =>{
-            this.setState({myData : res.data.data , loading: false})
-        })
-    }
-
-
 
     // select title from select option
     selectHandler = (event, inputIdentifier) => {
@@ -64,59 +52,103 @@ class EditData extends Component {
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
         };
-        updatedFormElement.value = event.target.value;
-        updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedOrderForm , selectedId : event.target.value , loading: true});
+        updatedFormElement.value = event.target.value;
+        this.setState({ orderForm: updatedOrderForm, selectedId: event.target.value, loading: true });
+    }
 
+    // select option CLICKED
+    clickedValue = (id) => {
         axios({
             method: 'get',
-            url: 'api/v1/article/' + this.state.selectedId ,
-            headers: { 
+            url: 'api/v1/article/' + this.state.selectedId,
+            headers: {
                 "Authorization": this.state.token,
-                "Accept":"application/json", 
+                "Accept": "application/json",
             },
         })
-        .then(res =>{
-            this.setState({myData : res.data.data , loading: false})
-        })
+            .then(res => {
+                this.setState({ myData: res.data.data, loading: false })
+            })
     }
 
     // DELETE data 
-    deleteDataHandler = (e , id) =>{
-        console.log( id)
+    deleteDataHandler = (e, id, catId ) => {
+
         confirmAlert({
             message: 'آیا میخواهید این اطلاعات را حذف کنید ؟',
             buttons: [
-              {
-                label: 'بله',
-                onClick: () => console.log('حذف شد ')
-              },
-              {
-                label: 'انصراف',
-                onClick: () => console.log('برگشت به صفحه')
-              }
+                {
+                    label: 'بله',
+                    onClick: () => {
+                        this.setState({ loading: true })
+                        console.log('حذف شد ')
+                        axios({
+                            method: 'delete',
+                            url: `api/v1/article/${catId}/delete/${id}`,
+                            headers: {
+                                "Authorization": this.state.token,
+                                "Accept": "application/json",
+                            },
+                        })
+                            .then(res => {
+                                this.setState({ myData: res.data.data, loading: false })
+                            })
+                    }
+                },
+                {
+                    label: 'انصراف',
+                    onClick: () => {
+
+                    }
+                }
             ]
-          })
+        })
 
     }
 
     // EDIT data
-    editDataHandler = (e , id) =>{
-        console.log( this.props.match.params)
+    editDataHandler = (e, id, catId , title , short_description , description , image , video , audio) => {
+        this.setState({
+            title:title,
+            short_description:short_description,
+            description:description,
+            image:image,
+            video:video,
+            audio:audio
+        })
+        console.log(this.props)
         confirmAlert({
             message: 'آیا میخواهید این اطلاعات را ویرایش کنید ؟',
             buttons: [
-              {
-                label: 'بله',
-                onClick: () => console.log('رفتن به صفحه ویرایش ')
-              },
-              {
-                label: 'انصراف',
-                onClick: () => console.log('برگشت به صفحه')
-              }
+                {
+                    label: 'بله',
+                    onClick: () => {
+                        console.log(' صفحه ویرایش ')
+                        this.setState({ edit: true  })
+                        this.props.history.push({pathname: '/edit-data/' + catId + '/' + id,
+                                                 state: 
+                                                 { 
+                                                    title:title,
+                                                    short_description:short_description,
+                                                    description:description,
+                                                    image:image,
+                                                    video:video,
+                                                    audio:audio,
+                                                    catId:catId,
+                                                    id:id
+                                                 }
+                            }
+                        )
+                        console.log(this.props)
+                    }
+                },
+                {
+                    label: 'انصراف',
+                    onClick: () => console.log('برگشت به صفحه')
+                }
             ]
-          })
+        })
 
 
     }
@@ -131,16 +163,17 @@ class EditData extends Component {
             });
         }
         let selectBox = <div>
-                            {formElementsArray.map(formElement => (
-                                formElement.config.elementType !== 'file' ? <Input
-                                    key={formElement.id}
-                                    elementType={formElement.config.elementType}
-                                    elementConfig={formElement.config.elementConfig}
-                                    value={formElement.config.value}
-                                    changed={(event) => this.selectHandler(event, formElement.id)}
-                                /> : null
-                    ))}
-                        </div>
+            {formElementsArray.map(formElement => (
+                formElement.config.elementType !== 'file' ? <Input
+                    key={formElement.id}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    changed={(event) => this.selectHandler(event, formElement.id)}
+                    clicked={this.clickedValue(formElement.config.value)}
+                /> : null
+            ))}
+        </div>
 
 
         const myDataArray = []
@@ -151,35 +184,44 @@ class EditData extends Component {
             });
         }
         const myDataShow = <div>
-                        {myDataArray.map(dataElement =>(
-                             <DataBox 
-                                key={dataElement.id}
-                                title={dataElement.data.title}
-                                short_description={dataElement.data.short_description}
-                                description={dataElement.data.description}
-                                image={dataElement.data.image}
-                                video={dataElement.data.video}
-                                audio={dataElement.data.audio}
-                                dataId={dataElement.data.id}
-                                selectedId={this.state.selectedId}
-                                deleteData={(e)=>this.deleteDataHandler(e , dataElement.id)}
-                                editData={(e)=>this.editDataHandler(e , dataElement.id)}
-                             />
-                        ))}
+            {myDataArray.map(dataElement => (
+                <DataBox
+                    key={dataElement.id}
+                    catId={dataElement.data.cat_id}
+                    title={dataElement.data.title}
+                    short_description={dataElement.data.short_description}
+                    description={dataElement.data.description}
+                    image={dataElement.data.image}
+                    video={dataElement.data.video}
+                    audio={dataElement.data.audio}
+                    dataId={dataElement.data.id}
+                    selectedId={this.state.selectedId}
+                    deleteData={(e) => this.deleteDataHandler(e, dataElement.data.id, dataElement.data.cat_id)}
+                    editData={(e) => this.editDataHandler(e, dataElement.data.id, 
+                                                             dataElement.data.cat_id ,
+                                                             dataElement.data.title,
+                                                             dataElement.data.short_description,
+                                                             dataElement.data.description,
+                                                             dataElement.data.image,
+                                                             dataElement.data.video,
+                                                             dataElement.data.audio
+                                                             )}
+                />
+            ))}
         </div>
-        
+
         return (
-            
+
             <div>
-                <Navbar />
+                <Navbar  />
                 <div className="dataSelect">
                     {selectBox}
-                    {this.state.selectedId}
+                    {/* {this.state.selectedId} */}
                 </div>
                 <div>
                     {myDataShow}
                 </div>
-                {this.state.loading ? 
+                {this.state.loading ?
                     <div className="loadingBox">
                         <div className="loader">
                         </div>
@@ -187,7 +229,7 @@ class EditData extends Component {
                             <p>منتظر بمانید</p>
                         </div>
                     </div>
-                : ''}
+                    : ''}
                 <Footer />
             </div>
         )
