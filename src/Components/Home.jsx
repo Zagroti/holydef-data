@@ -4,14 +4,15 @@ import Form from './Form';
 import Footer from './Footer';
 
 class Home extends Component {
+
     render() {
         return (
-
-            <div >
+            <div>
                 <Navbar />
                 <Form />
                 <Footer />
             </div>
+
         )
 
     }

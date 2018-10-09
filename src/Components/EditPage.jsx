@@ -114,14 +114,8 @@ class EditPage extends Component {
     }
 
 
-    // verfication CODE Handler
-    verficationCodeHandler = (event) => {
-        if (event.target.value === '914825') {
-            this.setState({ verfy: true })
-        } else {
-            this.setState({ verfy: false })
-        }
-    }
+
+
 
     // close success and error MESSAGE WINDOW 
     close = () => {
@@ -206,11 +200,6 @@ class EditPage extends Component {
 
                 <div className="sendVerfy">
                     <button className="sendBtn">ارسال</button>
-                    <input type="text" className="verfyInput"
-                        ref={(input) => { this.nameInput = input}}
-                        placeholder="کد امنیتی را واید کنید"
-                        onChange={(event) => this.verficationCodeHandler(event)}
-                        required />
                 </div>
             </form>
 
@@ -218,6 +207,7 @@ class EditPage extends Component {
         );
         return (
             <div>
+
                 <Navbar />
                 <div className="container formDiv">
                     <h2 className="formTitle color1">ویرایش محتوا</h2>

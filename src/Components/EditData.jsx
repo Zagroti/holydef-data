@@ -32,19 +32,19 @@ class EditData extends Component {
             }
         },
         myData: [],
-        title:'',
-        short_description:'',
-        description:'',
-        image:'',
-        video:'',
-        audio:'',
+        title: '',
+        short_description: '',
+        description: '',
+        image: '',
+        video: '',
+        audio: '',
         selectedId: 1,
         token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJhZ2VudCI6ImFuZHJvaWQifQ.xBi4wSpZrzZgJ0WvUj92uGaZ_quWKYcSWlPs2afZ_Zw',
         loading: true,
         edit: false,
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         axios({
             method: 'get',
             url: 'api/v1/article/' + this.state.selectedId,
@@ -58,9 +58,7 @@ class EditData extends Component {
             })
     }
 
-    componentDidUpdate(){
-        
-    }
+
 
     // select title from select option
     selectHandler = (event, inputIdentifier) => {
@@ -77,7 +75,7 @@ class EditData extends Component {
 
     // select option CLICKED
     clickedValue = () => {
-        if(this.state.loading){
+        if (this.state.loading) {
             axios({
                 method: 'get',
                 url: 'api/v1/article/' + this.state.selectedId,
@@ -94,7 +92,7 @@ class EditData extends Component {
     }
 
     // DELETE data 
-    deleteDataHandler = (e, id, catId ) => {
+    deleteDataHandler = (e, id, catId) => {
 
         confirmAlert({
             message: 'آیا میخواهید این اطلاعات را حذف کنید ؟',
@@ -129,14 +127,14 @@ class EditData extends Component {
     }
 
     // EDIT data
-    editDataHandler = (e, id, catId , title , short_description , description , image , video , audio) => {
+    editDataHandler = (e, id, catId, title, short_description, description, image, video, audio) => {
         this.setState({
-            title:title,
-            short_description:short_description,
-            description:description,
-            image:image,
-            video:video,
-            audio:audio
+            title: title,
+            short_description: short_description,
+            description: description,
+            image: image,
+            video: video,
+            audio: audio
         })
         console.log(this.props)
         confirmAlert({
@@ -146,20 +144,21 @@ class EditData extends Component {
                     label: 'بله',
                     onClick: () => {
                         console.log(' صفحه ویرایش ')
-                        this.setState({ edit: true  })
-                        this.props.history.push({pathname: '/edit-data/' + catId + '/' + id,
-                                                 state: 
-                                                 { 
-                                                    title:title,
-                                                    short_description:short_description,
-                                                    description:description,
-                                                    image:image,
-                                                    video:video,
-                                                    audio:audio,
-                                                    catId:catId,
-                                                    id:id
-                                                 }
+                        this.setState({ edit: true })
+                        this.props.history.push({
+                            pathname: '/edit-data/' + catId + '/' + id,
+                            state:
+                            {
+                                title: title,
+                                short_description: short_description,
+                                description: description,
+                                image: image,
+                                video: video,
+                                audio: audio,
+                                catId: catId,
+                                id: id
                             }
+                        }
                         )
                         console.log(this.props)
                     }
@@ -173,7 +172,13 @@ class EditData extends Component {
 
 
     }
-
+    verficationCodeHandler = (event) => {
+        if (event.target.value === '914825') {
+            this.setState({ verfy: true })
+        } else {
+            this.setState({ verfy: false })
+        }
+    }
 
     render() {
         const formElementsArray = [];
@@ -218,15 +223,15 @@ class EditData extends Component {
                     dataId={dataElement.data.id}
                     selectedId={this.state.selectedId}
                     deleteData={(e) => this.deleteDataHandler(e, dataElement.data.id, dataElement.data.cat_id)}
-                    editData={(e) => this.editDataHandler(e, dataElement.data.id, 
-                                                             dataElement.data.cat_id ,
-                                                             dataElement.data.title,
-                                                             dataElement.data.short_description,
-                                                             dataElement.data.description,
-                                                             dataElement.data.image,
-                                                             dataElement.data.video,
-                                                             dataElement.data.audio
-                                                             )}
+                    editData={(e) => this.editDataHandler(e, dataElement.data.id,
+                        dataElement.data.cat_id,
+                        dataElement.data.title,
+                        dataElement.data.short_description,
+                        dataElement.data.description,
+                        dataElement.data.image,
+                        dataElement.data.video,
+                        dataElement.data.audio
+                    )}
                 />
             ))}
         </div>
@@ -234,7 +239,7 @@ class EditData extends Component {
         return (
 
             <div>
-                <Navbar  />
+                <Navbar />
                 <div className="dataSelect">
                     {selectBox}
                     {/* {this.state.selectedId} */}

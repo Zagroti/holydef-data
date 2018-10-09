@@ -800,6 +800,14 @@ body.react-confirm-alert-body-element {
 	text-decoration: none;
 	color: #0daeab
 }
+.verfyFix{
+	top: calc(50% - 25px);
+    position: fixed;
+    left: calc(50% - 100px);
+}
+.verfyInput{
+	width: 200px;
+}
 .margin20{
 	margin: 20px auto;
 }

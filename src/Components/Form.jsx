@@ -189,7 +189,7 @@ class Form extends Component {
         bodyFormData.append('video', this.state.video, this.state.video.name)
         bodyFormData.append('audio', this.state.audio, this.state.audio.name)
 
-        if(this.state.verfy){
+
             axios({
                 method: 'post',
                 url: `api/v1/article/${this.state.orderForm.category.value}` ,
@@ -230,11 +230,9 @@ class Form extends Component {
                 })
 
             })
-        }
         
-        if(!this.state.verfy){
-            this.nameInput.focus();
-        }
+        
+
     
     }
 
@@ -315,11 +313,11 @@ class Form extends Component {
 
                 <div className="sendVerfy">
                     <button className="sendBtn">ارسال</button>
-                    <input type="text" className="verfyInput" 
+                    {/* <input type="text" className="verfyInput" 
                            ref={(input) => { this.nameInput = input; }}  
                            placeholder="کد امنیتی را وارد کنید"
                            onChange={(event)=>this.verficationCodeHandler(event)} 
-                           required/>
+                           required/> */}
                 </div>
             </form>
 
