@@ -6,14 +6,22 @@ import EditPage from './Components/EditPage'
 
 class App extends Component {
   state = {
-    verfy: false
+    verfy: false,
   }
+
+
+  
   componentDidMount(){
     this.nameInput.focus();
+    if(localStorage.getItem('number') === '914825' ) {
+      this.setState({ verfy: true })
   }
+  }
+
   verficationCodeHandler = (event) => {
     if (event.target.value === '914825') {
       this.setState({ verfy: true })
+      localStorage.setItem('number', '914825');
     } else {
       this.setState({ verfy: false })
     }
