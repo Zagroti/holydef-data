@@ -36,7 +36,7 @@ class App extends Component {
             <div className="sendVerfy verfyFix">
               <input type="text" className="verfyInput verfyInput"
                 ref={(input) => { this.nameInput = input; }}
-                placeholder="کد امنیتی را وارد کنید"
+                placeholder="رمز را وارد کنید"
                 onChange={(event) => this.verficationCodeHandler(event)}
                 required />
             </div>
