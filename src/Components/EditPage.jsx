@@ -49,8 +49,6 @@ class EditPage extends Component {
         this.image = ' ' || this.state.image
         this.video = ' ' || this.state.video
         this.audio = ' ' || this.state.audio
-        console.log('aud: ' + this.audio)
-        // this.nameTitle.value;
     }
 
 
@@ -75,7 +73,6 @@ class EditPage extends Component {
                 data: bodyFormData,
                 onUploadProgress: progressBar => {
                     let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                    console.log(progressPercent)
                     if (this.state.image.name !== null ||
                         this.state.video.name !== null ||
                         this.state.audio.name !== null ||
@@ -119,7 +116,6 @@ class EditPage extends Component {
     }
 
     changeImage = (e)=>{
-        console.log(e.target.files[0].name)
         this.setState({image:e.target.files[0] })
     }
     changeVideo = (e)=>{
@@ -132,7 +128,6 @@ class EditPage extends Component {
     render() {
         let errorClass = ['']
         let successClass = ['']
-        let verfyClass = ['']
 
         // --- set class for state of error handeling ---
         if (this.state.error) {

@@ -114,9 +114,10 @@ class Form extends Component {
         success: false,
         successText: '',
         verfy: false,
+        resetFormValue:''
     }
     componentWillMount(){
-        // console.log(this.props.history.location.pathname)
+
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -189,62 +190,53 @@ class Form extends Component {
         bodyFormData.append('video', this.state.video, this.state.video.name)
         bodyFormData.append('audio', this.state.audio, this.state.audio.name)
 
+        axios({
+            method: 'post',
+            url: `api/v1/article/${this.state.orderForm.category.value}` ,
+            data : bodyFormData,            
+            onUploadProgress: progressBar => {
+                let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
+                if (this.state.image.name !== null ||
+                    this.state.video.name !== null || 
+                    this.state.audio.name !== null || 
+                    this.state.orderForm.title.value !== '' || 
+                    this.state.orderForm.short_description.value || 
+                    this.state.orderForm.description !== '') {
 
-            axios({
-                method: 'post',
-                url: `api/v1/article/${this.state.orderForm.category.value}` ,
-                data : bodyFormData,            
-                onUploadProgress: progressBar => {
-                    let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
-                    console.log(progressPercent)
-                    if (this.state.image.name !== null ||
-                        this.state.video.name !== null || 
-                        this.state.audio.name !== null || 
-                        this.state.orderForm.title.value !== '' || 
-                        this.state.orderForm.short_description.value || 
-                        this.state.orderForm.description !== '') {
-    
-                        this.setState({progressPercent: progressPercent})
-                    } else{
-                        this.setState({progressPercent: null})
-                    }
-                    (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
+                    this.setState({progressPercent: progressPercent})
+                } else{
+                    this.setState({progressPercent: null})
                 }
-            })
-            .then(res => {
-                this.setState({
-                    success: true,
-                    successText: 'عملیات با موفقیت انجام شد',
-                    errorText: '',
-                    loading: false
-                })
 
-                res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
+                (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
+            }
+        })
+        .then(res => {
+            this.setState({
+                success: true,
+                successText: 'عملیات با موفقیت انجام شد',
+                errorText: '',
+                loading: false
             })
-            .catch(err => {
-                this.setState({
-                    error: true,
-                    errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
-                    successText: ' ',
-                    loading: false
-                })
+            res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
 
+
+        })
+        .catch(err => {
+            this.setState({
+                error: true,
+                errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
+                successText: ' ',
+                loading: false
             })
+
+        })
         
         
+        event.target.value = ''
 
     
     }
-
-
-    // verfication CODE Handler
-    verficationCodeHandler = (event) => {
-        if(event.target.value === '914825' ){
-            this.setState({verfy : true })
-        }else{
-            this.setState({verfy : false })
-        }
-    }   
 
     // close success and error MESSAGE WINDOW 
     close = () =>{

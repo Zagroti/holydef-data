@@ -104,7 +104,6 @@ class EditData extends Component {
                     label: 'بله',
                     onClick: () => {
                         this.setState({ loading: true })
-                        console.log('حذف شد ')
                         if(!this.state.loading){
 
                             axios({
@@ -142,14 +141,12 @@ class EditData extends Component {
             video: video,
             audio: audio
         })
-        console.log(this.props)
         confirmAlert({
             message: 'آیا میخواهید این اطلاعات را ویرایش کنید ؟',
             buttons: [
                 {
                     label: 'بله',
                     onClick: () => {
-                        console.log(' صفحه ویرایش ')
                         this.setState({ edit: true })
                         this.props.history.push({
                             pathname: '/edit-data/' + catId + '/' + id,
@@ -166,12 +163,11 @@ class EditData extends Component {
                             }
                         }
                         )
-                        console.log(this.props)
                     }
                 },
                 {
                     label: 'انصراف',
-                    onClick: () => console.log('برگشت به صفحه')
+                    onClick: () => {}
                 }
             ]
         })

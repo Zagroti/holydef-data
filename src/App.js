@@ -8,13 +8,14 @@ class App extends Component {
   state = {
     verfy: false
   }
+  componentDidMount(){
+    this.nameInput.focus();
+  }
   verficationCodeHandler = (event) => {
-    if (event.target.value === '914825') {
+    if (event.target.value === '1') {
       this.setState({ verfy: true })
     } else {
       this.setState({ verfy: false })
-      this.nameInput.focus();
-
     }
   }
 
