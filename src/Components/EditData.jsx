@@ -45,6 +45,8 @@ class EditData extends Component {
     }
 
     componentDidUpdate() {
+        if (this.state.loading) {
+
         axios({
             method: 'get',
             url: 'api/v1/article/' + this.state.selectedId,
@@ -56,6 +58,7 @@ class EditData extends Component {
             .then(res => {
                 this.setState({ myData: res.data.data, loading: false })
             })
+        }
     }
 
 
@@ -102,17 +105,20 @@ class EditData extends Component {
                     onClick: () => {
                         this.setState({ loading: true })
                         console.log('حذف شد ')
-                        axios({
-                            method: 'delete',
-                            url: `api/v1/article/${catId}/delete/${id}`,
-                            headers: {
-                                "Authorization": this.state.token,
-                                "Accept": "application/json",
-                            },
-                        })
-                            .then(res => {
-                                this.setState({ myData: res.data.data, loading: false })
+                        if(!this.state.loading){
+
+                            axios({
+                                method: 'delete',
+                                url: `api/v1/article/${catId}/delete/${id}`,
+                                headers: {
+                                    "Authorization": this.state.token,
+                                    "Accept": "application/json",
+                                },
                             })
+                                .then(res => {
+                                    this.setState({ myData: res.data.data, loading: false })
+                                })
+                        }
                     }
                 },
                 {

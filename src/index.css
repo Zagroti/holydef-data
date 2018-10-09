@@ -415,9 +415,9 @@ textarea::placeholder{
   margin: 60px auto;
   font-size: 10px;
   position: fixed;
-  border-top: .5em solid #fff;
-  border-right: .5em solid #fff;
-  border-bottom: .5em solid #fff;
+  border-top: .5em solid #ccc;
+  border-right: .5em solid #ccc;
+  border-bottom: .5em solid #ccc;
   border-left: .5em solid #0dc5c1;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -425,7 +425,7 @@ textarea::placeholder{
   -webkit-animation: load8 .5s infinite linear;
   animation: load8 .5s infinite linear;
   top: 30%;
-  left: 49vw;
+  left: calc(50% - 30px);
 }
 
 @keyframes load8 {
@@ -438,26 +438,36 @@ textarea::placeholder{
     transform: rotate(360deg);
   }
 }
-
+.messageBoxErr , .messageBoxScc {
+	background-color: #ffffff9c;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
 .loadingBox{
 	width: 100vw;
     height: 100vh;
     position: fixed;
-    background-color: #4b4b4b67;
+    background-color: #ffffff9c;
 	top: 0;
 	left: 0;
 }
 .loadingPercent{
     position: fixed;
     top: 50%;
-    left: 48.4vw;
+    left: calc(50% - 35px);
     font-size: 12px;
     padding: 0px 3px;
     color: #077c7a;
     text-align: center;
 }
 .errorText{
-	position: absolute; 
+	position: fixed; 
 	left: 0; 
 	right: 0; 
 	margin-left: auto; 
@@ -477,7 +487,7 @@ textarea::placeholder{
 	animation: error 1s linear;
 }
 .successClass{
-	position: absolute; 
+	position: fixed; 
 	left: 0; 
 	right: 0; 
 	margin-left: auto; 

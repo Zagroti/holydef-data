@@ -254,20 +254,27 @@ class Form extends Component {
     render() {
         let errorClass = ['']
         let successClass = ['']
-        let verfyClass = ['']
+        let messageBoxErr = ['']
+        let messageBoxScc = ['']
 
         // --- set class for state of error handeling ---
         if (this.state.error) {
             errorClass = ['errorText']
+            messageBoxErr = ['messageBoxErr']
         } else {
             errorClass = ['hidden']
+            messageBoxErr = ['hidden']
         }
 
         if (this.state.success) {
             successClass = ['successClass']
+            messageBoxScc = ['messageBoxScc']
         } else {
             successClass = ['hidden']
+            messageBoxScc = ['hiden']
         }
+
+        
 
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
@@ -313,11 +320,6 @@ class Form extends Component {
 
                 <div className="sendVerfy">
                     <button className="sendBtn">ارسال</button>
-                    {/* <input type="text" className="verfyInput" 
-                           ref={(input) => { this.nameInput = input; }}  
-                           placeholder="کد امنیتی را وارد کنید"
-                           onChange={(event)=>this.verficationCodeHandler(event)} 
-                           required/> */}
                 </div>
             </form>
 
@@ -328,7 +330,7 @@ class Form extends Component {
                 <div className="container formDiv">
                     <h2 className="formTitle color1">سامانه درج محتوا</h2>
                     {form}
-                    <div>
+                    <div >
                         {this.state.loading ?
                             <div className="loadingBox">
                                 <div className="loader">
@@ -337,18 +339,22 @@ class Form extends Component {
                                     <p>منتظر بمانید</p>
                                 </div>
                             </div>
-                            : ''}
+                             : ''}
                         {
                             !this.error ? 
+                            <div className={messageBoxErr.join(' ')}>
                                 <div className={errorClass.join(' ')}> {this.state.errorText}
                                     <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close}  />
-                                </div> : ''
+                                </div>
+                            </div> : ''
                         }
                         {
                             !this.success ?
+                            <div className={messageBoxScc.join(' ')}>
                                 <div className={successClass.join(' ')}> {this.state.successText} 
                                     <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
-                                </div> : ''
+                                </div>
+                            </div>     : ''
                         }
                     </div>
                 </div>

@@ -18,7 +18,6 @@ class EditPage extends Component {
         errorText: '',
         success: false,
         successText: '',
-        verfy: false,
         title: '',
         short_description: '',
         description: '',
@@ -69,7 +68,7 @@ class EditPage extends Component {
         bodyFormData.append('video', this.state.video, this.state.video)
         bodyFormData.append('audio', this.state.audio, this.state.audio)
 
-        if (this.state.verfy) {
+
             axios({
                 method: 'post',
                 url:  `/api/v1/article/${this.state.catId}/update/${this.state.id}`,
@@ -107,10 +106,7 @@ class EditPage extends Component {
                         loading: false
                     })
                 })
-        }
-        if (!this.state.verfy) {
-            this.nameInput.focus();
-        }
+        
     }
 
 
