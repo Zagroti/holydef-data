@@ -1,9 +1,13 @@
-import React, {   Component} from 'react'
+import React, { Component } from 'react'
 import Input from '../Components/Input/Input'
 import axios from '../axios';  // set base URL from axios --->
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import CKEditor from "react-ckeditor-component";
+
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 library.add(faWindowClose, fas)
 
@@ -15,18 +19,18 @@ class Form extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        {value: '1', displayValue: 'تاریخ دفاع مقدس'},
-                        {value: '2', displayValue: 'عملیات ها'},
-                        {value: '3', displayValue: 'سرداران دفاع مقدس'},
-                        {value: '4', displayValue: 'ستاد مشترک دفاع مقدس'},
-                        {value: '5', displayValue: 'دفاع مقدس در آیینه هنر'},
-                        {value: '6', displayValue: 'دستاورد های دفاع مقدس'},
-                        {value: '7', displayValue: 'ناگفته های دفاع مقدس'},
-                        {value: '8', displayValue: 'جغرافیا دفاع مقدس'},
-                        {value: '9', displayValue: 'نقش مردم در دفاع مقدس'},
-                        {value: '10', displayValue: 'بانک مقالات و پایان نامه ها'},
-                        {value: '11', displayValue: 'آزادگان و جانبازان'},
-                        {value: '12', displayValue: 'گاه شمار دفاع مقدس'},
+                        { value: '1', displayValue: 'تاریخ دفاع مقدس' },
+                        { value: '2', displayValue: 'عملیات ها' },
+                        { value: '3', displayValue: 'سرداران دفاع مقدس' },
+                        { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
+                        { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
+                        { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
+                        { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
+                        { value: '8', displayValue: 'جغرافیا دفاع مقدس' },
+                        { value: '9', displayValue: 'نقش مردم در دفاع مقدس' },
+                        { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
+                        { value: '11', displayValue: 'آزادگان و جانبازان' },
+                        { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
                     ]
                 },
                 value: '1',
@@ -114,9 +118,20 @@ class Form extends Component {
         success: false,
         successText: '',
         verfy: false,
-        resetFormValue:''
+        resetFormValue: '',
+        content: '',
+
     }
-    componentWillMount(){
+
+    constructor(props) {
+        super(props);
+        // this.updateContent = this.updateContent.bind(this);
+        this.onChange = this.onChange.bind(this);
+
+    }
+
+
+    componentWillMount() {
 
     }
 
@@ -132,7 +147,16 @@ class Form extends Component {
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        this.setState({orderForm: updatedOrderForm});
+        this.setState({ orderForm: updatedOrderForm });
+
+    }
+
+    ckChangeHandler = (event, editor) => {
+        const data = editor.getData();
+        console.log({ event, editor, data });
+        this.setState({ content: data })
+        console.log(this.state.content)
+
 
     }
 
@@ -148,7 +172,7 @@ class Form extends Component {
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        this.setState({orderForm: updatedOrderForm});
+        this.setState({ orderForm: updatedOrderForm });
 
         if (event.target.name === 'عکس') {
             this.setState({
@@ -180,68 +204,95 @@ class Form extends Component {
     // sent button FUNCTION
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({error: false, success: false})
+        this.setState({ error: false, success: false })
 
         var bodyFormData = new FormData();
         bodyFormData.append('title', this.state.orderForm.title.value);
         bodyFormData.append('short_description', this.state.orderForm.short_description.value);
-        bodyFormData.append('description', this.state.orderForm.description.value);
+        bodyFormData.append('description', this.state.content);
         bodyFormData.append('image', this.state.image, this.state.image.name)
         bodyFormData.append('video', this.state.video, this.state.video.name)
         bodyFormData.append('audio', this.state.audio, this.state.audio.name)
 
         axios({
             method: 'post',
-            url: `api/v1/article/${this.state.orderForm.category.value}` ,
-            data : bodyFormData,            
+            url: `api/v1/article/${this.state.orderForm.category.value}`,
+            data: bodyFormData,
             onUploadProgress: progressBar => {
                 let progressPercent = Math.round(progressBar.loaded / progressBar.total * 100)
                 if (this.state.image.name !== null ||
-                    this.state.video.name !== null || 
-                    this.state.audio.name !== null || 
-                    this.state.orderForm.title.value !== '' || 
-                    this.state.orderForm.short_description.value || 
+                    this.state.video.name !== null ||
+                    this.state.audio.name !== null ||
+                    this.state.orderForm.title.value !== '' ||
+                    this.state.orderForm.short_description.value ||
                     this.state.orderForm.description !== '') {
 
-                    this.setState({progressPercent: progressPercent})
-                } else{
-                    this.setState({progressPercent: null})
+                    this.setState({ progressPercent: progressPercent })
+                } else {
+                    this.setState({ progressPercent: null })
                 }
 
-                (progressPercent !== 100 || progressPercent !== null) ? this.setState({loading: true}) : this.setState({loading: false})
+                (progressPercent !== 100 || progressPercent !== null) ? this.setState({ loading: true }) : this.setState({ loading: false })
             }
         })
-        .then(res => {
-            this.setState({
-                success: true,
-                successText: 'عملیات با موفقیت انجام شد',
-                errorText: '',
-                loading: false
+            .then(res => {
+                this.setState({
+                    success: true,
+                    successText: 'عملیات با موفقیت انجام شد',
+                    errorText: '',
+                    loading: false
+                })
+                res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
+
             })
-            res.status !== 200 ? this.setState({loading: true}) : this.setState({loading: false})
+            .catch(err => {
+                this.setState({
+                    error: true,
+                    errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
+                    successText: ' ',
+                    loading: false
+                })
 
-
-        })
-        .catch(err => {
-            this.setState({
-                error: true,
-                errorText: 'خطا در انجام عملیات، لطفا دوباره امتحان کنید',
-                successText: ' ',
-                loading: false
             })
 
-        })
-        
-        
+
         event.target.value = ''
 
-    
+
     }
 
     // close success and error MESSAGE WINDOW 
-    close = () =>{
-        this.setState({error : false , success: false , vefryShow: false })
+    close = () => {
+        this.setState({ error: false, success: false, vefryShow: false })
     }
+
+
+    // CK Editor
+
+    updateContent(newContent) {
+        this.setState({
+            content: newContent
+        })
+    }
+
+    onChange(evt) {
+        console.log("onChange fired with event info: ", evt);
+        let newContent = evt.editor.getData();
+        this.setState({
+            content: newContent
+        })
+        console.log(newContent)
+        console.log(this.state.content)
+    }
+
+    onBlur(evt) {
+        console.log("onBlur event called with event info: ", evt);
+    }
+
+    afterPaste(evt) {
+        console.log("afterPaste event called with event info: ", evt);
+    }
+
 
     render() {
         let errorClass = ['']
@@ -266,7 +317,7 @@ class Form extends Component {
             messageBoxScc = ['hiden']
         }
 
-        
+
 
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
@@ -275,6 +326,8 @@ class Form extends Component {
                 config: this.state.orderForm[key]
             });
         }
+
+
 
         // --- create form elemnt of main page *Input * Button *Uploader * ... ----
         let form = (
@@ -293,6 +346,33 @@ class Form extends Component {
                         /> : null
                     ))}
                 </div>
+                <div >
+                    <CKEditor
+                        activeClass="p10"
+                        content={this.state.content}
+                        events={{
+                            "blur": this.onBlur,
+                            "afterPaste": this.afterPaste,
+                            "change": this.onChange
+                        }}
+                    />
+                    {/* <div className="" style={{width:'80%',margin:'auto'}}>
+                        <h2 style={{direction:'rtl',textAlign:'right'}} >Using CKEditor 5 build in React</h2>
+                        <CKEditor
+                            styel={{direction:'rtl',textAlign:'right'}}
+                            editor={ClassicEditor}
+                            data=""
+                            placeholder="ss"
+                            onInit={editor => {
+                                // You can store the "editor" and use when it is needed.
+                                console.log('Editor is ready to use!', editor);
+                            }}
+                            onChange={(event, editor) => { this.ckChangeHandler(event , editor)}}
+                        />
+                    </div> */}
+
+                </div>
+
                 <div className={'formInputFile '}>
                     {formElementsArray.map(formElement => (
                         formElement.config.elementType === 'file' ? <Input
@@ -331,22 +411,22 @@ class Form extends Component {
                                     <p>منتظر بمانید</p>
                                 </div>
                             </div>
-                             : ''}
+                            : ''}
                         {
-                            !this.error ? 
-                            <div className={messageBoxErr.join(' ')}>
-                                <div className={errorClass.join(' ')}> {this.state.errorText}
-                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close}  />
-                                </div>
-                            </div> : ''
+                            !this.error ?
+                                <div className={messageBoxErr.join(' ')}>
+                                    <div className={errorClass.join(' ')}> {this.state.errorText}
+                                        <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                    </div>
+                                </div> : ''
                         }
                         {
                             !this.success ?
-                            <div className={messageBoxScc.join(' ')}>
-                                <div className={successClass.join(' ')}> {this.state.successText} 
-                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
-                                </div>
-                            </div>     : ''
+                                <div className={messageBoxScc.join(' ')}>
+                                    <div className={successClass.join(' ')}> {this.state.successText}
+                                        <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                    </div>
+                                </div> : ''
                         }
                     </div>
                 </div>

@@ -118,8 +118,10 @@
 	border: none;
 }
 
-body {
+html ,body {
   overflow-x: hidden;
+  direction: rtl !important;
+  text-align: center !important;
 }
 .color1{
   color: #333;
@@ -279,6 +281,9 @@ textarea{
 	min-height:150px;
 	margin: 10px;
 	resize: none;
+	direction: rtl !important;
+	text-align: right !important;
+	/* padding: 30px !important; */
 }
 textarea::placeholder{
 	color: #0daeab;
@@ -821,6 +826,36 @@ body.react-confirm-alert-body-element {
 .margin20{
 	margin: 20px auto;
 }
+
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) ,
+ .ck.ck-editor__main>.ck-editor__editable{
+	direction: rtl !important;
+text-align: right;
+}
+.ck .ck-content .ck-editor__editable .ck-rounded-corners .ck-blurred .ck-editor__editable_inline p {
+direction: ltr;
+text-align: left
+}
+.ck .ck-button .ck-heading_heading1 .ck-off .ck-button_with-text {
+	direction: ltr !important;
+	text-align: left;
+}
+.cke_1{
+	direction: ltr !important;
+	text-align: right;
+}
+
+.cke_editable .cke_editable_themed .cke_contents_ltr .cke_show_borders , .cke_inner .cke_reset{
+	direction: ltr !important;
+	text-align: right;
+}
+.foo{
+	direction: ltr !important;
+	text-align: right;
+	color: red;
+}
+
 @media only screen and (max-width: 800px) {
 
 	.formInputFile{
