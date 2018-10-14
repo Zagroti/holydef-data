@@ -23,7 +23,7 @@ const dataBox = (props) => {
                     <label className="dataLabel" >توضیح کوتاه : </label>
                     <p className="dataText color3 " >{props.short_description}  </p>
                 </div>
-                <div className="titleBox" >
+                {/* <div className="titleBox" >
                     <label className="dataLabel" >توضیحات بلند : </label>
                     <p className="dataText color3 " >   {props.description}  </p>
                 </div>
@@ -38,7 +38,7 @@ const dataBox = (props) => {
                 <div className="titleBox" >
                     <label className="dataLabel" > فایل صوتی : </label>
                     <p className="dataText color3 " >{props.audio}   </p>
-                </div>
+                </div> */}
 
                 <div className="dataBtnBox" >
                     <button className="dataBtn editBtn"   onClick={props.editData} >ویرایش</button>

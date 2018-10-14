@@ -21,7 +21,9 @@ const input = (props) => {
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed}
-                required />;
+                required 
+                maxlength="70"
+                />;
             break;
         // case ('textarea'):
         //     inputElement = <textarea

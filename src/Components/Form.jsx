@@ -4,10 +4,9 @@ import axios from '../axios';  // set base URL from axios --->
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import CKEditor from "react-ckeditor-component";
-
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import 'jodit';
+import 'jodit/build/jodit.min.css';
+import JoditEditor from "jodit-react";
 
 library.add(faWindowClose, fas)
 
@@ -126,7 +125,7 @@ class Form extends Component {
     constructor(props) {
         super(props);
         // this.updateContent = this.updateContent.bind(this);
-        this.onChange = this.onChange.bind(this);
+        // this.onChange = this.onChange.bind(this);
 
     }
 
@@ -266,32 +265,47 @@ class Form extends Component {
         this.setState({ error: false, success: false, vefryShow: false })
     }
 
+    updateContent = (value) => {
+        this.setState({ content: value })
+        console.log(this.state)
+    }
+    jodit;
+    setRef = jodit => this.jodit = jodit;
+
+    config = {
+        readonly: false , // all options from https://xdsoft.net/jodit/doc/
+        showPlaceholder: false,
+        showWordsCounter:false,
+        showCharsCounter: false
+
+    }
+
 
     // CK Editor
 
-    updateContent(newContent) {
-        this.setState({
-            content: newContent
-        })
-    }
+    // updateContent(newContent) {
+    //     this.setState({
+    //         content: newContent
+    //     })
+    // }
 
-    onChange(evt) {
-        console.log("onChange fired with event info: ", evt);
-        let newContent = evt.editor.getData();
-        this.setState({
-            content: newContent
-        })
-        console.log(newContent)
-        console.log(this.state.content)
-    }
+    // onChange(evt) {
+    //     console.log("onChange fired with event info: ", evt);
+    //     let newContent = evt.editor.getData();
+    //     this.setState({
+    //         content: newContent
+    //     })
+    //     console.log(newContent)
+    //     console.log(this.state.content)
+    // }
 
-    onBlur(evt) {
-        console.log("onBlur event called with event info: ", evt);
-    }
+    // onBlur(evt) {
+    //     console.log("onBlur event called with event info: ", evt);
+    // }
 
-    afterPaste(evt) {
-        console.log("afterPaste event called with event info: ", evt);
-    }
+    // afterPaste(evt) {
+    //     console.log("afterPaste event called with event info: ", evt);
+    // }
 
 
     render() {
@@ -346,30 +360,15 @@ class Form extends Component {
                         /> : null
                     ))}
                 </div>
-                <div >
-                    <CKEditor
-                        activeClass="p10"
-                        content={this.state.content}
-                        events={{
-                            "blur": this.onBlur,
-                            "afterPaste": this.afterPaste,
-                            "change": this.onChange
-                        }}
+                <div style={{width:'80%' , margin : '0px auto 10px'}} >
+
+
+                    <JoditEditor
+                        editorRef={this.setRef}
+                        value={this.state.content}
+                        config={this.config}
+                        onChange={this.updateContent}
                     />
-                    {/* <div className="" style={{width:'80%',margin:'auto'}}>
-                        <h2 style={{direction:'rtl',textAlign:'right'}} >Using CKEditor 5 build in React</h2>
-                        <CKEditor
-                            styel={{direction:'rtl',textAlign:'right'}}
-                            editor={ClassicEditor}
-                            data=""
-                            placeholder="ss"
-                            onInit={editor => {
-                                // You can store the "editor" and use when it is needed.
-                                console.log('Editor is ready to use!', editor);
-                            }}
-                            onChange={(event, editor) => { this.ckChangeHandler(event , editor)}}
-                        />
-                    </div> */}
 
                 </div>
 

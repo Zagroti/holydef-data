@@ -827,34 +827,12 @@ body.react-confirm-alert-body-element {
 	margin: 20px auto;
 }
 
-
-.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) ,
- .ck.ck-editor__main>.ck-editor__editable{
-	direction: rtl !important;
-text-align: right;
-}
-.ck .ck-content .ck-editor__editable .ck-rounded-corners .ck-blurred .ck-editor__editable_inline p {
-direction: ltr;
-text-align: left
-}
-.ck .ck-button .ck-heading_heading1 .ck-off .ck-button_with-text {
-	direction: ltr !important;
-	text-align: left;
-}
-.cke_1{
-	direction: ltr !important;
+/* ............EDITOR */
+.jodit_container:not(.jodit_inline) .jodit_wysiwyg{
 	text-align: right;
+	direction: rtl;
 }
 
-.cke_editable .cke_editable_themed .cke_contents_ltr .cke_show_borders , .cke_inner .cke_reset{
-	direction: ltr !important;
-	text-align: right;
-}
-.foo{
-	direction: ltr !important;
-	text-align: right;
-	color: red;
-}
 
 @media only screen and (max-width: 800px) {
 
