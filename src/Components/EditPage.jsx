@@ -173,8 +173,8 @@ class EditPage extends Component {
         let form = (
             <form onSubmit={this.orderHandler}>
                 <div>
-                    <input type="text"  maxlength="70" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title }} />
-                    <input type="text"  maxlength="70" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
+                    <input type="text"  maxLength="70" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title }} />
+                    <input type="text"  maxLength="70" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
                     <div style={{ width: '80%', margin: '0px auto 10px' }} >
                         <JoditEditor
                             ref={(description) => { this.description = description }}
