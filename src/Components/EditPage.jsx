@@ -147,18 +147,24 @@ class EditPage extends Component {
     render() {
         let errorClass = ['']
         let successClass = ['']
+        let messageBoxErr = ['']
+        let messageBoxScc = ['']
 
         // --- set class for state of error handeling ---
         if (this.state.error) {
             errorClass = ['errorText']
+            messageBoxErr = ['messageBoxErr']
         } else {
             errorClass = ['hidden']
+            messageBoxErr = ['hidden']
         }
 
         if (this.state.success) {
             successClass = ['successClass']
+            messageBoxScc = ['messageBoxScc']
         } else {
             successClass = ['hidden']
+            messageBoxScc = ['hiden']
         }
 
         const formElementsArray = [];
@@ -231,7 +237,7 @@ class EditPage extends Component {
                 <div className="container formDiv">
                     <h2 className="formTitle color1">ویرایش محتوا</h2>
                     {form}
-                    <div>
+                    <div >
                         {this.state.loading ?
                             <div className="loadingBox">
                                 <div className="loader">
@@ -243,17 +249,20 @@ class EditPage extends Component {
                             : ''}
                         {
                             !this.error ?
-                                <div className={errorClass.join(' ')}> {this.state.errorText}
-                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                <div className={messageBoxErr.join(' ')}>
+                                    <div className={errorClass.join(' ')}> {this.state.errorText}
+                                        <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                    </div>
                                 </div> : ''
                         }
                         {
                             !this.success ?
-                                <div className={successClass.join(' ')}> {this.state.successText}
-                                    <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                <div className={messageBoxScc.join(' ')}>
+                                    <div className={successClass.join(' ')}> {this.state.successText}
+                                        <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                    </div>
                                 </div> : ''
                         }
-
                     </div>
                 </div>
                 <Footer />
