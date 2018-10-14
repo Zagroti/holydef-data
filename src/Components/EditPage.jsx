@@ -56,7 +56,6 @@ class EditPage extends Component {
         this.image = ' ' || this.state.image
         this.video = ' ' || this.state.video
         this.audio = ' ' || this.state.audio
-        console.log(this.description)
     }
 
 
@@ -117,7 +116,6 @@ class EditPage extends Component {
     // EDITOR  
     updateContent = (value) => {
         this.setState({ description: value })
-        console.log(this.state)
     }
     jodit;
     setRef = jodit => this.jodit = jodit;

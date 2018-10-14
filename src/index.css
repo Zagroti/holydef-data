@@ -832,7 +832,9 @@ body.react-confirm-alert-body-element {
 	text-align: right;
 	direction: rtl;
 }
-
+.jodit_toolbar{
+	text-align: right;
+}
 
 @media only screen and (max-width: 800px) {
 

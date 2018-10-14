@@ -122,14 +122,6 @@ class Form extends Component {
 
     }
 
-    constructor(props) {
-        super(props);
-        // this.updateContent = this.updateContent.bind(this);
-        // this.onChange = this.onChange.bind(this);
-
-    }
-
-
     componentWillMount() {
 
     }
@@ -152,11 +144,7 @@ class Form extends Component {
 
     ckChangeHandler = (event, editor) => {
         const data = editor.getData();
-        console.log({ event, editor, data });
         this.setState({ content: data })
-        console.log(this.state.content)
-
-
     }
 
     selectHandler = (event, inputIdentifier) => {
@@ -267,7 +255,6 @@ class Form extends Component {
 
     updateContent = (value) => {
         this.setState({ content: value })
-        console.log(this.state)
     }
     jodit;
     setRef = jodit => this.jodit = jodit;
@@ -279,34 +266,6 @@ class Form extends Component {
         showCharsCounter: false
 
     }
-
-
-    // CK Editor
-
-    // updateContent(newContent) {
-    //     this.setState({
-    //         content: newContent
-    //     })
-    // }
-
-    // onChange(evt) {
-    //     console.log("onChange fired with event info: ", evt);
-    //     let newContent = evt.editor.getData();
-    //     this.setState({
-    //         content: newContent
-    //     })
-    //     console.log(newContent)
-    //     console.log(this.state.content)
-    // }
-
-    // onBlur(evt) {
-    //     console.log("onBlur event called with event info: ", evt);
-    // }
-
-    // afterPaste(evt) {
-    //     console.log("afterPaste event called with event info: ", evt);
-    // }
-
 
     render() {
         let errorClass = ['']
@@ -361,8 +320,6 @@ class Form extends Component {
                     ))}
                 </div>
                 <div style={{width:'80%' , margin : '0px auto 10px'}} >
-
-
                     <JoditEditor
                         editorRef={this.setRef}
                         value={this.state.content}
