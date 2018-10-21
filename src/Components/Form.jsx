@@ -377,14 +377,16 @@ class Form extends Component {
     }
     jodit;
     setRef = jodit => this.jodit = jodit;
-
+    
     config = {
         readonly: false , // all options from https://xdsoft.net/jodit/doc/
         showPlaceholder: false,
         showWordsCounter:false,
-        showCharsCounter: false
+        showCharsCounter: false,
+
 
     }
+
 
     render() {
         let errorClass = ['']
