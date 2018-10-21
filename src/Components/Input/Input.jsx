@@ -22,7 +22,7 @@ const input = (props) => {
                 value={props.value}
                 onChange={props.changed}
                 required 
-                maxLength="70"
+                maxLength="110"
                 />;
             break;
         // case ('textarea'):
