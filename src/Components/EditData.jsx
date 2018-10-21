@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Input from '../Components/Input/Input'
 import axios from '../axios';  // set base URL from axios --->
 import Navbar from './Navbar'
 import Footer from './Footer'
 import DataBox from './DataBox/DataBox'
-import {confirmAlert} from 'react-confirm-alert'; // Import
+import { confirmAlert } from 'react-confirm-alert'; // Import
 
 
 class EditData extends Component {
@@ -14,18 +14,18 @@ class EditData extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        {value: '1', displayValue: 'تاریخ دفاع مقدس'},
-                        {value: '2', displayValue: 'عملیات ها'},
-                        {value: '3', displayValue: 'سرداران دفاع مقدس'},
-                        {value: '4', displayValue: 'ستاد مشترک دفاع مقدس'},
-                        {value: '5', displayValue: 'دفاع مقدس در آیینه هنر'},
-                        {value: '6', displayValue: 'دستاورد های دفاع مقدس'},
-                        {value: '7', displayValue: 'ناگفته های دفاع مقدس'},
-                        {value: '8', displayValue: 'جغرافیا دفاع مقدس'},
-                        {value: '9', displayValue: 'نقش مردم در دفاع مقدس'},
-                        {value: '10', displayValue: 'بانک مقالات و پایان نامه ها'},
-                        {value: '11', displayValue: 'آزادگان و جانبازان'},
-                        {value: '12', displayValue: 'گاه شمار دفاع مقدس'},
+                        { value: '1', displayValue: 'تاریخ دفاع مقدس' },
+                        { value: '2', displayValue: 'عملیات ها' },
+                        { value: '3', displayValue: 'سرداران دفاع مقدس' },
+                        { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
+                        { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
+                        { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
+                        { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
+                        { value: '8', displayValue: 'جغرافیا دفاع مقدس' },
+                        { value: '9', displayValue: 'نقش مردم در دفاع مقدس' },
+                        { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
+                        { value: '11', displayValue: 'آزادگان و جانبازان' },
+                        { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
                     ]
                 },
                 value: '1',
@@ -56,7 +56,7 @@ class EditData extends Component {
                 },
             })
                 .then(res => {
-                    this.setState({myData: res.data.data, loading: false})
+                    this.setState({ myData: res.data.data, loading: false })
                 })
         }
     }
@@ -72,7 +72,7 @@ class EditData extends Component {
         };
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         updatedFormElement.value = event.target.value;
-        this.setState({orderForm: updatedOrderForm, selectedId: event.target.value, loading: true});
+        this.setState({ orderForm: updatedOrderForm, selectedId: event.target.value, loading: true });
     }
 
     // select option CLICKED
@@ -86,7 +86,7 @@ class EditData extends Component {
                 },
             })
                 .then(res => {
-                    this.setState({myData: res.data.data, loading: false})
+                    this.setState({ myData: res.data.data, loading: false })
                 })
         }
 
@@ -101,7 +101,7 @@ class EditData extends Component {
                 {
                     label: 'بله',
                     onClick: () => {
-                        this.setState({loading: true})
+                        this.setState({ loading: true })
                         if (!this.state.loading) {
 
                             axios({
@@ -113,7 +113,7 @@ class EditData extends Component {
                                 },
                             })
                                 .then(res => {
-                                    this.setState({myData: res.data.data, loading: false})
+                                    this.setState({ myData: res.data.data, loading: false })
                                 })
                         }
                     }
@@ -140,32 +140,30 @@ class EditData extends Component {
             audio: audio
         })
 
-
-                        this.setState({edit: true})
-                        this.props.history.push({
-                                pathname: '/edit-data/' + catId + '/' + id,
-                                state:
-                                    {
-                                        title: title,
-                                        short_description: short_description,
-                                        description: description,
-                                        image: image,
-                                        video: video,
-                                        audio: audio,
-                                        catId: catId,
-                                        id: id
-                                    }
-                            }
-                        )
-
-
-
+        this.setState({ edit: true })
+        this.props.history.push({
+            pathname: '/edit-data/' + catId + '/' + id,
+            state:
+            {
+                title: title,
+                short_description: short_description,
+                description: description,
+                image: image,
+                video: video,
+                audio: audio,
+                catId: catId,
+                id: id
+            }
+        }
+        )
     }
+
+    
     verficationCodeHandler = (event) => {
         if (event.target.value === '914825') {
-            this.setState({verfy: true})
+            this.setState({ verfy: true })
         } else {
-            this.setState({verfy: false})
+            this.setState({ verfy: false })
         }
     }
 
@@ -228,7 +226,7 @@ class EditData extends Component {
         return (
 
             <div>
-                <Navbar/>
+                <Navbar />
                 <div className="dataSelect">
                     {selectBox}
                     {/* {this.state.selectedId} */}
@@ -245,7 +243,7 @@ class EditData extends Component {
                         </div>
                     </div>
                     : ''}
-                <Footer/>
+                <Footer />
             </div>
         )
     }

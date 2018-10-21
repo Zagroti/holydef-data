@@ -94,13 +94,20 @@ class EditPage extends Component {
             }
         })
             .then(res => {
+                
                 this.setState({
                     success: true,
                     successText: 'عملیات با موفقیت انجام شد',
                     errorText: '',
                     loading: false
                 })
-                res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
+                
+                if(res.status !== 200){
+                    this.setState({ loading: true })
+                }else{
+                    this.setState({ loading: false })
+                    this.props.history.push('/edit-data')
+                }
             })
             .catch(err => {
                 this.setState({
@@ -110,6 +117,7 @@ class EditPage extends Component {
                     loading: false
                 })
             })
+
 
     }
 
