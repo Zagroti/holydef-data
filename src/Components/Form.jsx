@@ -10,6 +10,115 @@ import JoditEditor from "jodit-react";
 
 library.add(faWindowClose, fas)
 
+const  initialState = {
+    orderForm: {
+        category: {
+            elementType: 'select',
+            elementConfig: {
+                options: [
+                    { value: '1', displayValue: 'تاریخ دفاع مقدس' },
+                    { value: '2', displayValue: 'عملیات ها' },
+                    { value: '3', displayValue: 'سرداران دفاع مقدس' },
+                    { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
+                    { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
+                    { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
+                    { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
+                    { value: '8', displayValue: 'جغرافیا دفاع مقدس' },
+                    { value: '9', displayValue: 'نقش مردم در دفاع مقدس' },
+                    { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
+                    { value: '11', displayValue: 'آزادگان و جانبازان' },
+                    { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
+                ]
+            },
+            value: '1',
+            validation: {},
+            valid: true
+        },
+        title: {
+            elementType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'عنوان'
+            },
+            value: '',
+            validation: {
+                required: true
+            },
+            valid: false,
+            touched: false
+        },
+        short_description: {
+            elementType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'توضیح کوتاه'
+            },
+            value: '',
+            validation: {
+                required: true
+            },
+            valid: false,
+            touched: false
+        },
+        description: {
+            elementType: 'textarea',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'توضیحات بلند'
+            },
+            value: '',
+            valid: false,
+            touched: false
+        },
+        image: {
+            elementType: 'file',
+            elementConfig: {
+                type: 'file',
+                accept: "image/*",
+                name: 'عکس'
+            },
+            value: '',
+        },
+        video: {
+            elementType: 'file',
+            elementConfig: {
+                type: 'file',
+                accept: "video/*",
+                name: 'ویدیو'
+            },
+            value: '',
+        },
+        audio: {
+            elementType: 'file',
+            elementConfig: {
+                type: 'file',
+                accept: "audio/*",
+                name: 'فایل صوتی'
+            },
+            value: '',
+        },
+    },
+    formIsValid: false,
+    loading: false,
+    image: {
+        name: null
+    },
+    video: {
+        name: null
+    },
+    audio: {
+        name: null
+    },
+    progressPercent: null,
+    error: false,
+    errorText: '',
+    success: false,
+    successText: '',
+    verfy: false,
+    resetFormValue: '',
+    content: '',
+}
+
 class Form extends Component {
 
     state = {
@@ -121,8 +230,10 @@ class Form extends Component {
         content: '',
 
     }
-
-    componentWillMount() {
+   
+    constructor(){
+        super();
+        this.state = initialState
 
     }
 
@@ -223,13 +334,21 @@ class Form extends Component {
             }
         })
             .then(res => {
-                this.setState({
-                    success: true,
-                    successText: 'عملیات با موفقیت انجام شد',
-                    errorText: '',
-                    loading: false
-                })
-                res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
+
+                // res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
+
+                if(res.status !== 200){
+                    this.setState({ loading: true })
+                }else{
+                    this.setState({ 
+                        ...initialState ,
+                        success: true,
+                        successText: 'عملیات با موفقیت انجام شد',
+                        errorText: '',
+                        loading: false
+                    })
+
+                }
 
             })
             .catch(err => {
