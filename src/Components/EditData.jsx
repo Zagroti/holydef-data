@@ -139,12 +139,8 @@ class EditData extends Component {
             video: video,
             audio: audio
         })
-        confirmAlert({
-            message: 'آیا میخواهید این اطلاعات را ویرایش کنید ؟',
-            buttons: [
-                {
-                    label: 'بله',
-                    onClick: () => {
+
+
                         this.setState({edit: true})
                         this.props.history.push({
                                 pathname: '/edit-data/' + catId + '/' + id,
@@ -161,15 +157,7 @@ class EditData extends Component {
                                     }
                             }
                         )
-                    }
-                },
-                {
-                    label: 'انصراف',
-                    onClick: () => {
-                    }
-                }
-            ]
-        })
+
 
 
     }
