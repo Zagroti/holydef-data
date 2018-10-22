@@ -77,7 +77,7 @@ class EditData extends Component {
 
     // select option CLICKED
     clickedValue = () => {
-        if (this.state.loading) {
+        if (this.state.loading ) {
             axios({
                 method: 'get',
                 url: 'api/v1/article/admin/' + this.state.selectedId,

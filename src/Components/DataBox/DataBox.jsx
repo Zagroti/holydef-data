@@ -15,13 +15,19 @@ const dataBox = (props) => {
             
             <div className="dataBox">
                 {/* <span>{props.dataId} </span> */}
-                <div className="titleBox" >
-                    <label className="dataLabel" > عنوان :</label>
-                    <p className="dataText color3"  >{props.title} </p>
-                </div>
-                <div className="titleBox" >
-                    <label className="dataLabel" >توضیح کوتاه : </label>
-                    <p className="dataText color3 " >{props.short_description}  </p>
+                <div className="myImageBox" >
+                    <div>
+                        <div className="titleBox" >
+                            <label className="dataLabel" > عنوان :</label>
+                            <p className="dataText color3"  >{props.title} </p>
+                        </div>
+                        <div className="titleBox" >
+                            <label className="dataLabel" >توضیح کوتاه : </label>
+                            <p className="dataText color3 " >{props.short_description}  </p>
+                        </div>
+                    </div>
+                    <img className="" src={props.image} />
+
                 </div>
                 {/* <div className="titleBox" >
                     <label className="dataLabel" >توضیحات بلند : </label>
