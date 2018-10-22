@@ -9,7 +9,7 @@ import { fas, faMusic, faImage, faFileVideo, faWindowClose } from '@fortawesome/
 // import 'jodit/build/jodit.min.css';
 // import JoditEditor from "jodit-react";
 import CKEditor from "react-ckeditor-component";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 library.add(faMusic, fas, faImage, faFileVideo, faWindowClose, fas)
 
@@ -223,7 +223,6 @@ class EditPage extends Component {
                         activeClass="p10 "
                         ref={(description) => { this.description = description }}
                         content={this.state.description}
-                        editor={ ClassicEditor }
                         events={{
                             "blur": this.onBlur,
                             "afterPaste": this.afterPaste,

@@ -8,7 +8,6 @@ import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 // import 'jodit/build/jodit.min.css';
 // import JoditEditor from "jodit-react";
 import CKEditor from "react-ckeditor-component";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 // import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 // import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
@@ -463,7 +462,6 @@ class Form extends Component {
                     <CKEditor
                         activeClass="p10 "
                         content={this.state.content}
-                        editor={ClassicEditor}
                         events={{
                             "blur": this.onBlur,
                             "afterPaste": this.afterPaste,
