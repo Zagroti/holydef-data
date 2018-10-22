@@ -4,13 +4,21 @@ import axios from '../axios';  // set base URL from axios --->
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import 'jodit';
-import 'jodit/build/jodit.min.css';
-import JoditEditor from "jodit-react";
+// import 'jodit';
+// import 'jodit/build/jodit.min.css';
+// import JoditEditor from "jodit-react";
+import CKEditor from "react-ckeditor-component";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+// import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+
 
 library.add(faWindowClose, fas)
 
-const  initialState = {
+const initialState = {
     orderForm: {
         category: {
             elementType: 'select',
@@ -230,11 +238,12 @@ class Form extends Component {
         content: '',
 
     }
-   
-    constructor(){
+
+    constructor() {
         super();
         this.state = initialState
-
+        this.updateContent = this.updateContent.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -337,11 +346,11 @@ class Form extends Component {
 
                 // res.status !== 200 ? this.setState({ loading: true }) : this.setState({ loading: false })
 
-                if(res.status !== 200){
+                if (res.status !== 200) {
                     this.setState({ loading: true })
-                }else{
-                    this.setState({ 
-                        ...initialState ,
+                } else {
+                    this.setState({
+                        ...initialState,
                         success: true,
                         successText: 'عملیات با موفقیت انجام شد',
                         errorText: '',
@@ -372,20 +381,27 @@ class Form extends Component {
         this.setState({ error: false, success: false, vefryShow: false })
     }
 
-    updateContent = (value) => {
-        this.setState({ content: value })
-    }
-    jodit;
-    setRef = jodit => this.jodit = jodit;
-    
-    config = {
-        readonly: false , // all options from https://xdsoft.net/jodit/doc/
-        showPlaceholder: false,
-        showWordsCounter:false,
-        showCharsCounter: false,
 
-
+    // CKEditor =============
+    updateContent(newContent) {
+        this.setState({
+            content: newContent
+        })
     }
+
+    onChange(evt) {
+        var newContent = evt.editor.getData();
+        this.setState({
+            content: newContent
+        })
+    }
+
+    onBlur(evt) {
+    }
+
+    afterPaste(evt) {
+    }
+
 
 
     render() {
@@ -440,12 +456,19 @@ class Form extends Component {
                         /> : null
                     ))}
                 </div>
-                <div style={{width:'80%' , margin : '0px auto 10px'}} >
-                    <JoditEditor
-                        editorRef={this.setRef}
-                        value={this.state.content}
-                        config={this.config}
-                        onChange={this.updateContent}
+                <div style={{ width: '80%', margin: '0px auto 10px' }} >
+
+                </div>
+                <div style={{ width: '80%', margin: '0px auto 10px' }}>
+                    <CKEditor
+                        activeClass="p10 "
+                        content={this.state.content}
+                        editor={ClassicEditor}
+                        events={{
+                            "blur": this.onBlur,
+                            "afterPaste": this.afterPaste,
+                            "change": this.onChange
+                        }}
                     />
 
                 </div>

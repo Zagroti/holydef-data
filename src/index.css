@@ -575,7 +575,9 @@ textarea::placeholder{
 	border-color: #077c7a;
 }
 
-
+.cke_rtl{
+	direction: rtl
+}
 
 
 

@@ -5,9 +5,11 @@ import Navbar from './Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faMusic, faImage, faFileVideo, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import 'jodit';
-import 'jodit/build/jodit.min.css';
-import JoditEditor from "jodit-react";
+// import 'jodit';
+// import 'jodit/build/jodit.min.css';
+// import JoditEditor from "jodit-react";
+import CKEditor from "react-ckeditor-component";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 library.add(faMusic, fas, faImage, faFileVideo, faWindowClose, fas)
 
@@ -34,6 +36,7 @@ class EditPage extends Component {
     constructor(props){
         super(props)
         this.updateContent = this.updateContent.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
     componentWillMount() {
@@ -122,20 +125,39 @@ class EditPage extends Component {
     }
 
     // EDITOR  
-    updateContent = (value) => {
-        this.setState({ description: value })
+    // updateContent = (value) => {
+    //     this.setState({ description: value })
+    // }
+    // jodit;
+    // setRef = jodit => this.jodit = jodit;
+
+    // config = {
+    //     readonly: false , // all options from https://xdsoft.net/jodit/doc/
+    //     showPlaceholder: false,
+    //     showWordsCounter:false,
+    //     showCharsCounter: false
+
+    // }
+
+    // CKEditor =============
+    updateContent(newContent) {
+        this.setState({
+            description: newContent
+        })
     }
-    jodit;
-    setRef = jodit => this.jodit = jodit;
 
-    config = {
-        readonly: false , // all options from https://xdsoft.net/jodit/doc/
-        showPlaceholder: false,
-        showWordsCounter:false,
-        showCharsCounter: false
-
+    onChange(evt) {
+        var newContent = evt.editor.getData();
+        this.setState({
+            description: newContent
+        })
     }
 
+    onBlur(evt) {
+    }
+
+    afterPaste(evt) {
+    }
 
     // close success and error MESSAGE WINDOW 
     close = () => {
@@ -189,13 +211,24 @@ class EditPage extends Component {
                 <div>
                     <input type="text"  maxLength="110" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title }} />
                     <input type="text"  maxLength="110" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
-                    <div style={{ width: '80%', margin: '0px auto 10px' }} >
-                        <JoditEditor
+                        {/* <JoditEditor
                             ref={(description) => { this.description = description }}
                             editorRef={this.setRef}
                             value={this.state.description}
                             config={this.config}
                             onChange={this.updateContent}
+                        /> */}
+                    <div style={{ width: '80%', margin: '0px auto 10px' }} >
+                        <CKEditor
+                        activeClass="p10 "
+                        ref={(description) => { this.description = description }}
+                        content={this.state.description}
+                        editor={ ClassicEditor }
+                        events={{
+                            "blur": this.onBlur,
+                            "afterPaste": this.afterPaste,
+                            "change": this.onChange
+                        }}
                         />
 
                     </div>
