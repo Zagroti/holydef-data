@@ -12,22 +12,28 @@ const dataBox = (props) => {
 
     return (
         <div  >
-            
+
             <div className="dataBox">
                 {/* <span>{props.dataId} </span> */}
                 <div className="myImageBox" >
-                    <div>
-                        <div className="titleBox" >
-                            <label className="dataLabel" > عنوان :</label>
-                            <p className="dataText color3"  >{props.title} </p>
+                    <div className="myTitleBox">
+                        <div>
+                            <div className="titleBox" >
+                                <label className="dataLabel" > عنوان :</label>
+                                <p className="dataText color3"  >{props.title} </p>
+                            </div>
+                            <div className="titleBox" >
+                                <label className="dataLabel" >توضیح کوتاه : </label>
+                                <p className="dataText color3 " >{props.short_description}  </p>
+                            </div>
                         </div>
-                        <div className="titleBox" >
-                            <label className="dataLabel" >توضیح کوتاه : </label>
-                            <p className="dataText color3 " >{props.short_description}  </p>
-                        </div>
-                    </div>
-                    <img className="" src={props.image} />
+                        <img className="" alt="عکس" src={props.image} />
 
+                    </div>
+                    <div className="dataBtnBox" >
+                        <button className="dataBtn editBtn" onClick={props.editData} >ویرایش</button>
+                        <button className="dataBtn deleteBtn" onClick={props.deleteData}>حذف</button>
+                    </div>
                 </div>
                 {/* <div className="titleBox" >
                     <label className="dataLabel" >توضیحات بلند : </label>
@@ -46,10 +52,7 @@ const dataBox = (props) => {
                     <p className="dataText color3 " >{props.audio}   </p>
                 </div> */}
 
-                <div className="dataBtnBox" >
-                    <button className="dataBtn editBtn"   onClick={props.editData} >ویرایش</button>
-                    <button className="dataBtn deleteBtn" onClick={props.deleteData}>حذف</button>
-                </div>
+
 
             </div>
 

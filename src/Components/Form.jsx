@@ -90,7 +90,7 @@ const initialState = {
             elementType: 'file',
             elementConfig: {
                 type: 'file',
-                accept: "video/*",
+                accept: "video/mp4",
                 name: 'ویدیو'
             },
             value: '',
@@ -99,7 +99,7 @@ const initialState = {
             elementType: 'file',
             elementConfig: {
                 type: 'file',
-                accept: "audio/*",
+                accept: "audio/mp3",
                 name: 'فایل صوتی'
             },
             value: '',
@@ -401,7 +401,7 @@ class Form extends Component {
     afterPaste(evt) {
     }
 
-
+ 
 
     render() {
         let errorClass = ['']
@@ -460,12 +460,15 @@ class Form extends Component {
                 </div>
                 <div style={{ width: '80%', margin: '0px auto 10px' }}>
                     <CKEditor
-                        activeClass="p10 "
+                        activeClass="p10"
                         content={this.state.content}
                         events={{
                             "blur": this.onBlur,
                             "afterPaste": this.afterPaste,
                             "change": this.onChange
+                        }}
+                        config ={{
+                            contentsLangDirection : 'rtl'
                         }}
                     />
 

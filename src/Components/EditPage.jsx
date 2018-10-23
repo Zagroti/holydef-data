@@ -231,6 +231,23 @@ class EditPage extends Component {
                                 "afterPaste": this.afterPaste,
                                 "change": this.onChange
                             }}
+                            config={{
+                                contentsLangDirection: 'rtl',
+                                font_style:
+                                {
+                                    element: '*',
+                                    styles: { 'font-family': 'IRANSans' },
+                                    overrides: [{ element: 'font', attributes: { 'face': null } }]
+                                },
+                                font_names: 'IRANSans',
+                                fontSize_defaultLabel: '40px',
+                                fontSize_style :
+                                {
+                                    element: 'p',
+                                    styles: { 'font-size': '90px' },
+                                    overrides: [{ element: 'font', attributes: { 'size': null } }]
+                                }
+                            }}
                         />
 
                     </div>
@@ -243,7 +260,7 @@ class EditPage extends Component {
                             <input className={'fileInputField '} type="file" name="عکس" accept='image/*' onChange={this.changeImage} ref={(image) => { this.image = image }} />
                         </div>
                         {/* <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a> */}
-                        <img src={this.state.image} className="play " />
+                        <img src={this.state.image} alt="عکس" className="play " />
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
@@ -251,7 +268,7 @@ class EditPage extends Component {
                                 <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
                             </span>
                             <span>انتخاب ویدیو</span>
-                            <input className={'fileInputField '} type="file" name="ویدیو" accept='video/*' onChange={this.changeVideo} ref={(video) => { this.video = video }} />
+                            <input className={'fileInputField '} type="file" name="ویدیو" accept='video/mp4' onChange={this.changeVideo} ref={(video) => { this.video = video }} />
                         </div>
                         {this.state.video ?
                             <div className="play" >
@@ -269,7 +286,7 @@ class EditPage extends Component {
                                 <FontAwesomeIcon className="DLIcon" icon={faMusic} />
                             </span>
                             <span>انتخاب فایل صوتی</span>
-                            <input className={'fileInputField '} type="file" name="فایل صوتی" accept='audio/*' onChange={this.changeAudio} ref={(audio) => { this.audio = audio }} />
+                            <input className={'fileInputField '} type="file" name="فایل صوتی" accept='audio/mp3' onChange={this.changeAudio} ref={(audio) => { this.audio = audio }} />
                         </div>
 
 

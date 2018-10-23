@@ -599,12 +599,19 @@ textarea::placeholder{
 .myImageBox{
 	display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+	align-items: center;
+    flex-direction: row;
+	
 }
 .myImageBox img{
-	width: 170px;
+	width: 90px;
 	margin: 10px;
 	border-radius: 10px;
+}
+.myTitleBox{
+	width: 60%;
+	display: flex;
+	flex-direction: column;
 }
 .titleBox{
 	display: flex;
@@ -617,27 +624,26 @@ textarea::placeholder{
     text-align: right;
 }
 .dataBtn{
-    width: 80px;
+    width: 150px;
     text-align: center;
     justify-content: center;
-    height: 50px;
+    height: 40px;
     cursor: pointer;
     border-radius: 30px;
 	font-size: 13px;
 	font-weight: 400;
     transition: all .3s linear;
 	color: #fff;
-	margin: 20px 0px 0px 20px;
+	margin: 10px 0px 0px 10px;
 }
 .dataText{
 	max-width: 80%;
     overflow: hidden;
 }
 .dataBtnBox{
-    width: 80%;
-    margin: auto;
     display: flex;
-    justify-content: center;
+	justify-content: center;
+	flex-direction: column;
 }
 .editBtn{
     background: #0d80ae;
@@ -894,6 +900,13 @@ body.react-confirm-alert-body-element {
 	.myImageBox {
 		flex-direction: column;
 		align-items: center;
+	}
+	.myTitleBox{
+		align-items: center;
+	}
+	.myImageBox img{
+		width: 200px;
+		margin-top: 10px;
 	}
 }
 
