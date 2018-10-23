@@ -103,7 +103,6 @@ class EditData extends Component {
                     onClick: () => {
                         this.setState({ loading: true })
                         if (!this.state.loading) {
-
                             axios({
                                 method: 'delete',
                                 url: `api/v1/article/${catId}/delete/${id}`,

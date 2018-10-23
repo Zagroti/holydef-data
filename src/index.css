@@ -558,6 +558,9 @@ textarea::placeholder{
 .myb{
 	border: 1px solid red;
 }
+
+
+
 /* ================footer ================ */
 
 
@@ -612,9 +615,15 @@ textarea::placeholder{
 	width: 60%;
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 }
 .titleBox{
 	display: flex;
+}
+.videoBox{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 .dataLabel{
     font-size: 13px;
@@ -834,8 +843,9 @@ body.react-confirm-alert-body-element {
 	text-decoration: none;
 	color: #0daeab;
 	border-radius: 10px;
-	width: 25%;
+	width: 150px;
 }
+
 .verfyFix{
 	top: calc(50% - 25px);
     position: fixed;
@@ -907,6 +917,11 @@ body.react-confirm-alert-body-element {
 	.myImageBox img{
 		width: 200px;
 		margin-top: 10px;
+	}
+	.videoBox{
+		display: unset;
+		flex-direction: row;
+		align-items: center;
 	}
 }
 

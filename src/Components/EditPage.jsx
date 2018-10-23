@@ -260,7 +260,7 @@ class EditPage extends Component {
                             <input className={'fileInputField '} type="file" name="عکس" accept='image/*' onChange={this.changeImage} ref={(image) => { this.image = image }} />
                         </div>
                         {/* <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a> */}
-                        <img src={this.state.image} alt="عکس" className="play " />
+                        <img src={this.state.image} alt="عکس" className="play " style={{width:'unset',height:'80px'}} />
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >

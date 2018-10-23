@@ -1,7 +1,10 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faMusic, faImage, faFileVideo } from '@fortawesome/free-solid-svg-icons'
+
+
+
 
 library.add(faMusic, fas, faImage, faFileVideo)
 
@@ -27,7 +30,26 @@ const dataBox = (props) => {
                                 <p className="dataText color3 " >{props.short_description}  </p>
                             </div>
                         </div>
-                        <img className="" alt="عکس" src={props.image} />
+                        <div className="videoBox">
+                            <img className="" alt="عکس" src={props.image} />
+                            {props.video ?
+                                <div className="play" >
+                                    <a href={props.video} target="blank" style={{ color: "#0daeab" }} >
+                                        <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
+                                    </a>
+                                </div>
+                                : <span className="play">     </span>}
+                            {
+                                props.audio ?
+                                    <div>
+                                        <a href={props.audio} target="blank" style={{ color: "#0daeab" }} >
+                                            <FontAwesomeIcon className="DLIcon" icon={faMusic} />
+                                        </a>
+                                    </div>
+                                    : <span className="play">     </span>
+                            }
+
+                        </div>
 
                     </div>
                     <div className="dataBtnBox" >
