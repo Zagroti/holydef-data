@@ -9,6 +9,9 @@ import { fas, faMusic, faImage, faFileVideo, faWindowClose } from '@fortawesome/
 // import 'jodit/build/jodit.min.css';
 // import JoditEditor from "jodit-react";
 import CKEditor from "react-ckeditor-component";
+import "../../node_modules/video-react/dist/video-react.css";
+import { Player } from 'video-react';
+import ReactAudioPlayer from 'react-audio-player';
 
 
 library.add(faMusic, fas, faImage, faFileVideo, faWindowClose, fas)
@@ -33,7 +36,7 @@ class EditPage extends Component {
         id: null
     }
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.updateContent = this.updateContent.bind(this)
         this.onChange = this.onChange.bind(this)
@@ -55,7 +58,7 @@ class EditPage extends Component {
     componentDidMount() {
         this.title.value = this.state.title
         this.short_description.value = this.state.short_description
-        this.description.value =  this.state.description 
+        this.description.value = this.state.description
         this.image = ' ' || this.state.image
         this.video = ' ' || this.state.video
         this.audio = ' ' || this.state.audio
@@ -97,17 +100,17 @@ class EditPage extends Component {
             }
         })
             .then(res => {
-                
+
                 this.setState({
                     success: true,
                     successText: 'عملیات با موفقیت انجام شد',
                     errorText: '',
                     loading: false
                 })
-                
-                if(res.status !== 200){
+
+                if (res.status !== 200) {
                     this.setState({ loading: true })
-                }else{
+                } else {
                     this.setState({ loading: false })
                     this.props.history.push('/edit-data')
                 }
@@ -209,9 +212,9 @@ class EditPage extends Component {
         let form = (
             <form onSubmit={this.orderHandler}>
                 <div>
-                    <input type="text"  maxLength="110" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title }} />
-                    <input type="text"  maxLength="110" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
-                        {/* <JoditEditor
+                    <input type="text" maxLength="110" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title }} />
+                    <input type="text" maxLength="110" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
+                    {/* <JoditEditor
                             ref={(description) => { this.description = description }}
                             editorRef={this.setRef}
                             value={this.state.description}
@@ -220,14 +223,14 @@ class EditPage extends Component {
                         /> */}
                     <div style={{ width: '80%', margin: '0px auto 10px' }} >
                         <CKEditor
-                        activeClass="p10 "
-                        ref={(description) => { this.description = description }}
-                        content={this.state.description}
-                        events={{
-                            "blur": this.onBlur,
-                            "afterPaste": this.afterPaste,
-                            "change": this.onChange
-                        }}
+                            activeClass="p10 "
+                            ref={(description) => { this.description = description }}
+                            content={this.state.description}
+                            events={{
+                                "blur": this.onBlur,
+                                "afterPaste": this.afterPaste,
+                                "change": this.onChange
+                            }}
                         />
 
                     </div>
@@ -239,7 +242,8 @@ class EditPage extends Component {
                             <span>انتخاب عکس</span>
                             <input className={'fileInputField '} type="file" name="عکس" accept='image/*' onChange={this.changeImage} ref={(image) => { this.image = image }} />
                         </div>
-                        <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a>
+                        {/* <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a> */}
+                        <img src={this.state.image} className="play " />
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
@@ -249,7 +253,15 @@ class EditPage extends Component {
                             <span>انتخاب ویدیو</span>
                             <input className={'fileInputField '} type="file" name="ویدیو" accept='video/*' onChange={this.changeVideo} ref={(video) => { this.video = video }} />
                         </div>
-                        <a target="_blank" className="play" href={this.state.video} >پخش فایل ویدیویی</a>
+                        {this.state.video ?
+                            <div className="play" >
+                                <Player
+                                    playsInline
+                                    poster=""
+                                    src={this.state.video}
+                                />
+                            </div>
+                            : <span className="play">فایل ویدیویی برای نمایش وجود ندارد</span>}
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
@@ -259,7 +271,23 @@ class EditPage extends Component {
                             <span>انتخاب فایل صوتی</span>
                             <input className={'fileInputField '} type="file" name="فایل صوتی" accept='audio/*' onChange={this.changeAudio} ref={(audio) => { this.audio = audio }} />
                         </div>
-                        <a target="_blank" className="play" href={this.state.audio} >پخش فایل صوتی</a>
+
+
+                        {
+                            this.state.audio ?
+                                <div>
+                                    <ReactAudioPlayer
+                                        src={this.state.audio}
+                                        autoPlay
+                                        controls
+                                    />
+                                </div>
+                                : <span className="play">فایل صوتی برای پخش وجود ندارد</span>
+                        }
+
+
+
+
                     </div>
                 </div>
 

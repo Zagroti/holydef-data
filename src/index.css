@@ -824,9 +824,11 @@ body.react-confirm-alert-body-element {
 	margin: unset;
 }
 .play{
-	padding-right: 30px;
+	margin-right: 30px;
 	text-decoration: none;
-	color: #0daeab
+	color: #0daeab;
+	border-radius: 10px;
+	width: 25%;
 }
 .verfyFix{
 	top: calc(50% - 25px);
@@ -841,7 +843,7 @@ body.react-confirm-alert-body-element {
 }
 
 /* ............EDITOR */
-.jodit_container:not(.jodit_inline) .jodit_wysiwyg{
+/* .jodit_container:not(.jodit_inline) .jodit_wysiwyg{
 	text-align: right;
 	direction: rtl;
 }
@@ -850,6 +852,12 @@ body.react-confirm-alert-body-element {
 }
 .jodit_workplace{
     height: 320px !important;
+} */
+
+.cke_editable {
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: IRANSans !important;
 }
 
 @media only screen and (max-width: 800px) {
