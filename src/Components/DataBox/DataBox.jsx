@@ -32,22 +32,27 @@ const dataBox = (props) => {
                         </div>
                         <div className="videoBox">
                             <img className="" alt="عکس" src={props.image} />
-                            {props.video ?
-                                <div className="play" >
-                                    <a href={props.video} target="blank" style={{ color: "#0daeab" }} >
-                                        <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
-                                    </a>
-                                </div>
-                                : <span className="play">     </span>}
-                            {
-                                props.audio ?
-                                    <div>
-                                        <a href={props.audio} target="blank" style={{ color: "#0daeab" }} >
-                                            <FontAwesomeIcon className="DLIcon" icon={faMusic} />
-                                        </a>
-                                    </div>
-                                    : <span className="play">     </span>
-                            }
+                            <div className="twoPlay" >
+                                
+                                                            {props.video ?
+                                                                <div className="play" >
+                                                                    <a href={props.video} target="blank" style={{ color: "#0daeab" }} >
+                                                                        <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
+                                                                    </a>
+                                                                </div>
+                                                                : <span className="">     </span>}
+                                                            {
+                                                                props.audio ?
+                                                                    <div className="play">
+                                                                        <a href={props.audio} target="blank" style={{ color: "#0daeab" }} >
+                                                                            <FontAwesomeIcon className="DLIcon" icon={faMusic} />
+                                                                        </a>
+                                                                    </div>
+                                                                    : <span className="">     </span>
+                                                            }
+
+
+                            </div>
 
                         </div>
 

@@ -628,10 +628,11 @@ textarea::placeholder{
 	width: 75%;
 }
 .videoBox{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	width: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 125px;
+    justify-content: center;
 }
 .dataLabel{
     font-size: 13px;
@@ -847,12 +848,15 @@ body.react-confirm-alert-body-element {
 .fileInputEdit{
 	margin: unset;
 }
+.twoPlay{
+	display: flex;
+}
 .play{
-	margin-right: 30px;
-	text-decoration: none;
-	color: #0daeab;
-	border-radius: 10px;
-	width: 150px;
+    text-decoration: none;
+    color: #0daeab;
+    border-radius: 10px;
+    width: 40px;
+    text-align: center;
 }
 
 .verfyFix{
