@@ -1,11 +1,11 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faTrashAlt, faImage, faVideo, faVolumeUp , faEdit} from '@fortawesome/free-solid-svg-icons'
+import { fas, faTrashAlt, faImage, faVideo, faVolumeUp, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 
 
-library.add(faTrashAlt, fas, faImage, faVideo, faVolumeUp ,faEdit)
+library.add(faTrashAlt, fas, faImage, faVideo, faVolumeUp, faEdit)
 
 const dataBox = (props) => {
 
@@ -40,9 +40,11 @@ const dataBox = (props) => {
                     <div className="dataBtnBox" >
                         <div className="twoBtnBox" >
                             <button className="dataBtn editBtn" onClick={props.editData} >
+                                <span style={{fontSize: '14px'}} >ویرایش</span>
                                 <FontAwesomeIcon className="DLIcon" icon={faEdit} />
                             </button>
                             <button className="dataBtn deleteBtn" onClick={props.deleteData}>
+                                <span style={{fontSize: '14px'}}>حذف</span>
                                 <FontAwesomeIcon className="DLIcon" icon={faTrashAlt} />
                             </button>
                         </div>
@@ -50,21 +52,21 @@ const dataBox = (props) => {
 
                             {
                                 props.video ?
-                            <div className="play" >
-                                <a href={props.video} target="blank"  className="playLink" >
-                                    <FontAwesomeIcon className="DLIcon" icon={faVideo} />
-                                </a>
-                            </div>
-                             : <span className="">     </span> 
+                                    <div className="play" >
+                                        <a href={props.video} target="blank" className="playLink" >
+                                            <FontAwesomeIcon className="DLIcon" icon={faVideo} />
+                                        </a>
+                                    </div>
+                                    : <span className="">     </span>
                             }
                             {
                                 props.audio ?
-                                <div className="play">
-                                    <a href={props.audio} target="blank" className="playLink"  >
-                                        <FontAwesomeIcon className="DLIcon" icon={faVolumeUp} />
-                                    </a>
-                                </div>
-                                : <span className="">     </span>
+                                    <div className="play">
+                                        <a href={props.audio} target="blank" className="playLink"  >
+                                            <FontAwesomeIcon className="DLIcon" icon={faVolumeUp} />
+                                        </a>
+                                    </div>
+                                    : <span className="">     </span>
                             }
 
 

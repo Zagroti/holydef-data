@@ -644,16 +644,17 @@ textarea::placeholder{
 .dataBtn{
     width: 150px;
     text-align: center;
-    -ms-flex-pack: center;
-    justify-content: center;
     height: 40px;
     cursor: pointer;
     border-radius: 30px;
-    -webkit-transition: all .3s linear;
-    -o-transition: all .3s linear;
     transition: all .3s linear;
     color: #fff;
-    margin: 5px 0;
+	margin: 5px 0;
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+	align-items: center;
+	padding: 0px 20px;
 }
 
 .dataText{
