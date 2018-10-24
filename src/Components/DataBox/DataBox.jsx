@@ -42,13 +42,13 @@ const dataBox = (props) => {
                                     </div>
                                     : <span className="">     </span>}
                                 {
-                                    // props.audio ?
+                                    props.audio ?
                                         <div className="play">
                                             <a href={props.audio} target="blank" style={{ color: "#0daeab" }} >
                                                 <FontAwesomeIcon className="DLIcon" icon={faMusic} />
                                             </a>
                                         </div>
-                                        // : <span className="">     </span>
+                                        : <span className="">     </span>
                                 }
 
 
