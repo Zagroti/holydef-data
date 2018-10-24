@@ -921,8 +921,12 @@ body.react-confirm-alert-body-element {
 		align-items: center;
 	}
 	.myTitleBox{
+		width: 100%;
 		align-items: center;
 		flex-direction: column;
+	}
+	.subtitleBox{
+		width: 100%;
 	}
 	.myImageBox img{
 		border-radius: 10px;
