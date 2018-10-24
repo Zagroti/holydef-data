@@ -1,9 +1,9 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faMusic, faImage, faFileVideo } from '@fortawesome/free-solid-svg-icons'
+import { fas, faImage,faVideo, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMusic, fas, faImage, faFileVideo)
+library.add(fas, faImage,faVideo, faVolumeUp )
 
 const input = (props) => {
     let inputElement = null;
@@ -54,9 +54,9 @@ const input = (props) => {
     }
     let myIcon = null;
     if (props.elementConfig.name === 'فایل صوتی') {
-        myIcon = faMusic;
+        myIcon = faVolumeUp;
     } else if (props.elementConfig.name === 'ویدیو') {
-        myIcon = faFileVideo;
+        myIcon = faVideo;
     } else {
         myIcon = faImage;
     }
@@ -64,7 +64,7 @@ const input = (props) => {
         inputElementFile =
             <div className={'fileInput'} >
                 {props.value ? props.value :
-                    <span className="myIcon">
+                    <span className="myIcon xicon">
                         <FontAwesomeIcon className="DLIcon" icon={myIcon} />
                         {props.elementConfig.name}
                     </span>

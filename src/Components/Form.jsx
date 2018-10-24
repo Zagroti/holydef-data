@@ -4,15 +4,7 @@ import axios from '../axios';  // set base URL from axios --->
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-// import 'jodit';
-// import 'jodit/build/jodit.min.css';
-// import JoditEditor from "jodit-react";
 import CKEditor from "react-ckeditor-component";
-// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-// import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 
 
 library.add(faWindowClose, fas)

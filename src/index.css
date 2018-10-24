@@ -394,7 +394,7 @@ textarea::placeholder{
 	transition: all .3s linear;
 }
 
-.svg-inline--fa.fa-w-12 , .svg-inline--fa.fa-w-16{
+.xicon .svg-inline--fa.fa-w-12 ,.xicon .svg-inline--fa.fa-w-16  ,.xicon .svg-inline--fa.fa-w-14 ,.xicon .svg-inline--fa.fa-w-18{
     margin: 0px 10px;
     width: 30px;
     overflow: visible;
@@ -642,11 +642,11 @@ textarea::placeholder{
     text-align: right;
 }
 .dataBtn{
-    width: 120px;
+    width: 150px;
     text-align: center;
     -ms-flex-pack: center;
     justify-content: center;
-    height: 35px;
+    height: 40px;
     cursor: pointer;
     border-radius: 30px;
     -webkit-transition: all .3s linear;
@@ -655,29 +655,36 @@ textarea::placeholder{
     color: #fff;
     margin: 5px 0;
 }
+
 .dataText{
 	max-width: 80%;
     overflow: hidden;
 }
+
 .dataBtnBox{
     display: flex;
 	justify-content: center;
-	flex-direction: column;
+	flex-direction: row-reverse;
+}
+.twoBtnBox{
+	width: 150px;
 }
 .editBtn{
-    background: #0f8f9e;
+	background-color: #0daeab;
+	font-size: 20px;
     transition: all .3s linear;
 }
 .deleteBtn{
-    background: #c70707;
+	background-color: #c70707;
+	font-size: 20px;
     transition: all .3s linear;
 }
 .editBtn:hover{
-    background: #0f8f9ec7;
+	background-color: #0daeab9c;
     transition: all .3s linear;
 }
 .deleteBtn:hover{
-	background: #c70707d0;
+	background-color: #c70707a1;
     transition: all .3s linear;
 }
 
@@ -850,12 +857,43 @@ body.react-confirm-alert-body-element {
 }
 .twoPlay{
 	display: flex;
+	flex-direction: column;
+}
+.playEditPage{
+	text-decoration: none;
+    color: #0daeab;
+    border-radius: 10px;
+	text-align: center;
+	margin-right: 30px;
+	width: 200px;
+}
+.playLink{
+	color: rgb(13, 174, 171);
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .play{
     text-decoration: none;
     color: #0daeab;
     border-radius: 10px;
-    text-align: center;
+	text-align: center;
+	width: 50px;
+	font-size: 20px;
+	transition: all .2s linear;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	height: 50px;
+}
+.play svg{
+	transition: all .2s linear;
+
+}
+.play:hover svg{
+    color: #0daeab93;
+	transition: all .2s linear;
 }
 
 .verfyFix{
@@ -917,7 +955,7 @@ body.react-confirm-alert-body-element {
 		flex-direction: column;
 	}
 	.play{
-		padding: 30px 0px;
+		padding: 5px 0px;
 	}
 	.myImageBox {
 		flex-direction: column;

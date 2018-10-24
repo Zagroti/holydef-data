@@ -4,17 +4,14 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faMusic, faImage, faFileVideo, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-// import 'jodit';
-// import 'jodit/build/jodit.min.css';
-// import JoditEditor from "jodit-react";
+import { fas, faImage, faWindowClose , faVideo, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import CKEditor from "react-ckeditor-component";
 import "../../node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
 import ReactAudioPlayer from 'react-audio-player';
 
 
-library.add(faMusic, fas, faImage, faFileVideo, faWindowClose, fas)
+library.add(fas, faImage, faWindowClose, fas , faVideo, faVolumeUp)
 
 class EditPage extends Component {
 
@@ -127,21 +124,6 @@ class EditPage extends Component {
 
     }
 
-    // EDITOR  
-    // updateContent = (value) => {
-    //     this.setState({ description: value })
-    // }
-    // jodit;
-    // setRef = jodit => this.jodit = jodit;
-
-    // config = {
-    //     readonly: false , // all options from https://xdsoft.net/jodit/doc/
-    //     showPlaceholder: false,
-    //     showWordsCounter:false,
-    //     showCharsCounter: false
-
-    // }
-
     // CKEditor =============
     updateContent(newContent) {
         this.setState({
@@ -214,13 +196,6 @@ class EditPage extends Component {
                 <div>
                     <input type="text" maxLength="110" className="InputElement margin20" placeholder="عنوان" ref={(title) => { this.title = title }} />
                     <input type="text" maxLength="110" className="InputElement margin20" placeholder="توضیح کوتاه " ref={(short_description) => { this.short_description = short_description }} />
-                    {/* <JoditEditor
-                            ref={(description) => { this.description = description }}
-                            editorRef={this.setRef}
-                            value={this.state.description}
-                            config={this.config}
-                            onChange={this.updateContent}
-                        /> */}
                     <div style={{ width: '80%', margin: '0px auto 10px' }} >
                         <CKEditor
                             activeClass="p10 "
@@ -253,37 +228,37 @@ class EditPage extends Component {
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
-                            <span className="myIcon">
+                            <span className="myIcon xicon">
                                 <FontAwesomeIcon className="DLIcon" icon={faImage} />
                             </span>
                             <span>انتخاب عکس</span>
                             <input className={'fileInputField '} type="file" name="عکس" accept='image/*' onChange={this.changeImage} ref={(image) => { this.image = image }} />
                         </div>
                         {/* <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a> */}
-                        <img src={this.state.image} alt="عکس" className="play " style={{width:'unset',height:'80px'}} />
+                        <img src={this.state.image} alt="عکس" className="playEditPage " style={{width:'unset',height:'80px'}} />
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
-                            <span className="myIcon">
-                                <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
+                            <span className="myIcon xicon">
+                                <FontAwesomeIcon className="DLIcon" icon={faVideo} />
                             </span>
                             <span>انتخاب ویدیو</span>
                             <input className={'fileInputField '} type="file" name="ویدیو" accept='video/mp4' onChange={this.changeVideo} ref={(video) => { this.video = video }} />
                         </div>
                         {this.state.video ?
-                            <div className="play" >
+                            <div className="playEditPage" >
                                 <Player
                                     playsInline
                                     poster=""
                                     src={this.state.video}
                                 />
                             </div>
-                            : <span className="play">فایل ویدیویی برای نمایش وجود ندارد</span>}
+                            : <span className="playEditPage">فایل ویدیویی برای نمایش وجود ندارد</span>}
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
-                            <span className="myIcon">
-                                <FontAwesomeIcon className="DLIcon" icon={faMusic} />
+                            <span className="myIcon xicon ">
+                                <FontAwesomeIcon className="DLIcon" icon={faVolumeUp} />
                             </span>
                             <span>انتخاب فایل صوتی</span>
                             <input className={'fileInputField '} type="file" name="فایل صوتی" accept='audio/mp3' onChange={this.changeAudio} ref={(audio) => { this.audio = audio }} />
@@ -292,14 +267,14 @@ class EditPage extends Component {
 
                         {
                             this.state.audio ?
-                                <div>
+                                <div className="playEditPage" >
                                     <ReactAudioPlayer
                                         src={this.state.audio}
                                         autoPlay
                                         controls
                                     />
                                 </div>
-                                : <span className="play">فایل صوتی برای پخش وجود ندارد</span>
+                                : <span className="playEditPage">فایل صوتی برای پخش وجود ندارد</span>
                         }
 
 

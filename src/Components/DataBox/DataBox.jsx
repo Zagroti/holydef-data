@@ -1,12 +1,11 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faMusic, faImage, faFileVideo } from '@fortawesome/free-solid-svg-icons'
+import { fas, faTrashAlt, faImage, faVideo, faVolumeUp , faEdit} from '@fortawesome/free-solid-svg-icons'
 
 
 
-
-library.add(faMusic, fas, faImage, faFileVideo)
+library.add(faTrashAlt, fas, faImage, faVideo, faVolumeUp ,faEdit)
 
 const dataBox = (props) => {
 
@@ -32,34 +31,44 @@ const dataBox = (props) => {
                         </div>
                         <div className="videoBox">
                             <img className="" alt="عکس" src={props.image} />
-                            <div className="twoPlay" >
-
-                                {props.video ?
-                                    <div className="play" >
-                                        <a href={props.video} target="blank" style={{ color: "#0daeab" }} >
-                                            <FontAwesomeIcon className="DLIcon" icon={faFileVideo} />
-                                        </a>
-                                    </div>
-                                    : <span className="">     </span>}
-                                {
-                                    props.audio ?
-                                        <div className="play">
-                                            <a href={props.audio} target="blank" style={{ color: "#0daeab" }} >
-                                                <FontAwesomeIcon className="DLIcon" icon={faMusic} />
-                                            </a>
-                                        </div>
-                                        : <span className="">     </span>
-                                }
 
 
-                            </div>
 
                         </div>
 
                     </div>
                     <div className="dataBtnBox" >
-                        <button className="dataBtn editBtn" onClick={props.editData} >ویرایش</button>
-                        <button className="dataBtn deleteBtn" onClick={props.deleteData}>حذف</button>
+                        <div className="twoBtnBox" >
+                            <button className="dataBtn editBtn" onClick={props.editData} >
+                                <FontAwesomeIcon className="DLIcon" icon={faEdit} />
+                            </button>
+                            <button className="dataBtn deleteBtn" onClick={props.deleteData}>
+                                <FontAwesomeIcon className="DLIcon" icon={faTrashAlt} />
+                            </button>
+                        </div>
+                        <div className="twoPlay" >
+
+                            {
+                                props.video ?
+                            <div className="play" >
+                                <a href={props.video} target="blank"  className="playLink" >
+                                    <FontAwesomeIcon className="DLIcon" icon={faVideo} />
+                                </a>
+                            </div>
+                             : <span className="">     </span> 
+                            }
+                            {
+                                props.audio ?
+                                <div className="play">
+                                    <a href={props.audio} target="blank" className="playLink"  >
+                                        <FontAwesomeIcon className="DLIcon" icon={faVolumeUp} />
+                                    </a>
+                                </div>
+                                : <span className="">     </span>
+                            }
+
+
+                        </div>
                     </div>
                 </div>
                 {/* <div className="titleBox" >
