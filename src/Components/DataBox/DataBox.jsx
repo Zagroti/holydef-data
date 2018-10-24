@@ -20,7 +20,7 @@ const dataBox = (props) => {
                 {/* <span>{props.dataId} </span> */}
                 <div className="myImageBox" >
                     <div className="myTitleBox">
-                        <div>
+                        <div className="subtitleBox" >
                             <div className="titleBox" >
                                 <label className="dataLabel" > عنوان :</label>
                                 <p className="dataText color3"  >{props.title} </p>
