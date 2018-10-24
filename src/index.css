@@ -665,7 +665,7 @@ textarea::placeholder{
 	flex-direction: column;
 }
 .editBtn{
-    background: #0d80ae;
+    background: #0f8f9e;
     transition: all .3s linear;
 }
 .deleteBtn{
@@ -673,7 +673,7 @@ textarea::placeholder{
     transition: all .3s linear;
 }
 .editBtn:hover{
-    background: #0d80aed2;
+    background: #0f8f9ec7;
     transition: all .3s linear;
 }
 .deleteBtn:hover{
@@ -855,7 +855,6 @@ body.react-confirm-alert-body-element {
     text-decoration: none;
     color: #0daeab;
     border-radius: 10px;
-    width: 40px;
     text-align: center;
 }
 
