@@ -18,7 +18,7 @@ const initialState = {
                     { value: '1', displayValue: 'تاریخ دفاع مقدس' },
                     { value: '2', displayValue: 'عملیات ها' },
                     { value: '3', displayValue: 'سرداران دفاع مقدس' },
-                    { value: '4', displayValue: 'ستاد مشترک دفاع مقدس' },
+                    { value: '4', displayValue: 'دانستنی های  دفاع مقدس' },
                     { value: '5', displayValue: 'دفاع مقدس در آیینه هنر' },
                     { value: '6', displayValue: 'دستاورد های دفاع مقدس' },
                     { value: '7', displayValue: 'ناگفته های دفاع مقدس' },
