@@ -690,12 +690,14 @@ textarea::placeholder{
 }
 
 .fa-w-16.closeIcon{
-	position: absolute;
-    top: -3px;
-    right: 4px;
+    position: absolute;
+    top: -2px;
+    right: 0px;
     margin: 0;
-	width: 20px;
-	cursor: pointer;
+    width: 23px;
+    cursor: pointer;
+    color: #1d8348;
+    height: 23px;
 }
 
 /* ========================== CONFIRM window  */
