@@ -26,6 +26,8 @@ class EditData extends Component {
                         { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
                         { value: '11', displayValue: 'آزادگان و جانبازان' },
                         { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
+                        { value: '13', displayValue: '   سروده ها و آواهای دفاع مقدس' }
+
                     ]
                 },
                 value: '1',
@@ -77,7 +79,7 @@ class EditData extends Component {
 
     // select option CLICKED
     clickedValue = () => {
-        if (this.state.loading ) {
+        if (this.state.loading) {
             axios({
                 method: 'get',
                 url: 'api/v1/article/admin/' + this.state.selectedId,
@@ -157,7 +159,7 @@ class EditData extends Component {
         )
     }
 
-    
+
     verficationCodeHandler = (event) => {
         if (event.target.value === '914825') {
             this.setState({ verfy: true })
