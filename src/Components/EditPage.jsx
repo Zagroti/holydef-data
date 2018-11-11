@@ -278,8 +278,6 @@ class EditPage extends Component {
                         }
 
 
-
-
                     </div>
                 </div>
 

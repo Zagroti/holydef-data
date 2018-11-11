@@ -27,6 +27,7 @@ const initialState = {
                     { value: '10', displayValue: 'بانک مقالات و پایان نامه ها' },
                     { value: '11', displayValue: 'آزادگان و جانبازان' },
                     { value: '12', displayValue: 'گاه شمار دفاع مقدس' },
+                    { value: '13', displayValue: '   سروده ها و آواهای دفاع مقدس' }
                 ]
             },
             value: '1',
@@ -347,9 +348,7 @@ class Form extends Component {
                         errorText: '',
                         loading: false
                     })
-
                 }
-
             })
             .catch(err => {
                 this.setState({
@@ -358,7 +357,6 @@ class Form extends Component {
                     successText: ' ',
                     loading: false
                 })
-
             })
 
 
@@ -393,7 +391,7 @@ class Form extends Component {
     afterPaste(evt) {
     }
 
- 
+
 
     render() {
         let errorClass = ['']
@@ -415,7 +413,7 @@ class Form extends Component {
             messageBoxScc = ['messageBoxScc']
         } else {
             successClass = ['hidden']
-            messageBoxScc = ['hiden']
+            messageBoxScc = ['hidden']
         }
 
 
@@ -459,8 +457,8 @@ class Form extends Component {
                             "afterPaste": this.afterPaste,
                             "change": this.onChange
                         }}
-                        config ={{
-                            contentsLangDirection : 'rtl'
+                        config={{
+                            contentsLangDirection: 'rtl'
                         }}
                     />
 
