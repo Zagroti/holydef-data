@@ -228,7 +228,8 @@ class Form extends Component {
         verfy: false,
         resetFormValue: '',
         content: '',
-
+        imageOverSize: false,
+        imageOverSizeTxt: ''
     }
 
     constructor() {
@@ -266,28 +267,51 @@ class Form extends Component {
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
         };
-        updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.touched = true;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        this.setState({ orderForm: updatedOrderForm });
+
 
         if (event.target.name === 'عکس') {
-            this.setState({
-                image: event.target.files[0] || ''
-            })
+            if (event.target.files[0].size < 512000) {
+                this.setState({
+                    image: event.target.files[0] || '', imageOverSize: false
+                })
+                updatedFormElement.value = event.target.value;
+
+            } else {
+                this.setState({
+                    image: '', imageOverSize: true, imageOverSizeTxt: 'حجم عکس باید کمتر از 500 کیلوبایت باشد'
+                })
+                updatedFormElement.value = this.state.orderForm.image.value
+            }
+
+
         } else if (event.target.name === 'ویدیو') {
             this.setState({
                 video: event.target.files[0] || ''
             })
+            updatedFormElement.value = event.target.value;
+
         } else if (event.target.name === 'فایل صوتی') {
             this.setState({
                 audio: event.target.files[0] || ''
             })
+            updatedFormElement.value = event.target.value;
+
         }
+        // updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        this.setState({ orderForm: updatedOrderForm });
+
     }
 
+
+    // console.log(event.target)
+    // let jasper = Object.assign({}, this.state.orderForm.image);  
+    // jasper.value = 'اندازه تصویر بزرگ است';           
+    // this.setState({ jasper });
+    // console.log(this.state.orderForm.image)
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -367,7 +391,7 @@ class Form extends Component {
 
     // close success and error MESSAGE WINDOW 
     close = () => {
-        this.setState({ error: false, success: false, vefryShow: false })
+        this.setState({ error: false, success: false, vefryShow: false, imageOverSize: false })
     }
 
 
@@ -398,6 +422,9 @@ class Form extends Component {
         let successClass = ['']
         let messageBoxErr = ['']
         let messageBoxScc = ['']
+        let imageOverClass = ['']
+        let messageImageOver = ['']
+
 
         // --- set class for state of error handeling ---
         if (this.state.error) {
@@ -415,6 +442,16 @@ class Form extends Component {
             successClass = ['hidden']
             messageBoxScc = ['hidden']
         }
+
+
+        if (this.state.imageOverSize) {
+            imageOverClass = ['errorText']
+            messageImageOver = ['messageBoxErr']
+        } else {
+            imageOverClass = ['hidden']
+            messageImageOver = ['hidden']
+        }
+
 
 
 
@@ -515,6 +552,14 @@ class Form extends Component {
                             !this.success ?
                                 <div className={messageBoxScc.join(' ')}>
                                     <div className={successClass.join(' ')}> {this.state.successText}
+                                        <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                    </div>
+                                </div> : ''
+                        }
+                        {
+                            this.state.imageOverSize ?
+                                <div className={messageImageOver.join(' ')}>
+                                    <div className={imageOverClass.join(' ')}> {this.state.imageOverSizeTxt}
                                         <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
                                     </div>
                                 </div> : ''

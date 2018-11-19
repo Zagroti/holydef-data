@@ -4,14 +4,14 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas, faImage, faWindowClose , faVideo, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+import { fas, faImage, faWindowClose, faVideo, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import CKEditor from "react-ckeditor-component";
 import "../../node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
 import ReactAudioPlayer from 'react-audio-player';
 
 
-library.add(fas, faImage, faWindowClose, fas , faVideo, faVolumeUp)
+library.add(fas, faImage, faWindowClose, fas, faVideo, faVolumeUp)
 
 class EditPage extends Component {
 
@@ -30,7 +30,9 @@ class EditPage extends Component {
         video: '',
         audio: '',
         catId: null,
-        id: null
+        id: null,
+        imageOverSize: false,
+        imageOverSizeTxt: ''
     }
 
     constructor(props) {
@@ -146,11 +148,18 @@ class EditPage extends Component {
 
     // close success and error MESSAGE WINDOW 
     close = () => {
-        this.setState({ error: false, success: false, vefryShow: false })
+        this.setState({ error: false, success: false, vefryShow: false  , imageOverSize:false})
     }
 
     changeImage = (e) => {
-        this.setState({ image: e.target.files[0] })
+        if(e.target.files[0].size < 512000){
+            this.setState({ image: e.target.files[0] ,  imageOverSize: false })
+        }else{
+            this.setState({
+                imageOverSize: true, imageOverSizeTxt: 'حجم عکس باید کمتر از 500 کیلوبایت باشد'
+            })
+        }
+
     }
     changeVideo = (e) => {
         this.setState({ video: e.target.files[0] })
@@ -164,6 +173,8 @@ class EditPage extends Component {
         let successClass = ['']
         let messageBoxErr = ['']
         let messageBoxScc = ['']
+        let imageOverClass = ['']
+        let messageImageOver = ['']
 
         // --- set class for state of error handeling ---
         if (this.state.error) {
@@ -180,6 +191,14 @@ class EditPage extends Component {
         } else {
             successClass = ['hidden']
             messageBoxScc = ['hiden']
+        }
+
+        if (this.state.imageOverSize) {
+            imageOverClass = ['errorText']
+            messageImageOver = ['messageBoxErr']
+        } else {
+            imageOverClass = ['hidden']
+            messageImageOver = ['hidden']
         }
 
         const formElementsArray = [];
@@ -216,7 +235,7 @@ class EditPage extends Component {
                                 },
                                 font_names: 'IRANSans',
                                 fontSize_defaultLabel: '40px',
-                                fontSize_style :
+                                fontSize_style:
                                 {
                                     element: 'p',
                                     styles: { 'font-size': '90px' },
@@ -235,7 +254,7 @@ class EditPage extends Component {
                             <input className={'fileInputField '} type="file" name="عکس" accept='image/*' onChange={this.changeImage} ref={(image) => { this.image = image }} />
                         </div>
                         {/* <a target="_blank" className="play" href={this.state.image} >نمایش عکس</a> */}
-                        <img src={this.state.image} alt="عکس" className="playEditPage " style={{width:'unset',height:'80px'}} />
+                        <img src={this.state.image} alt="عکس" className="playEditPage " style={{ width: 'unset', height: '80px' }} />
                     </div>
                     <div className="InputElement margin20 editPageInput" >
                         <div className="fileInput fileInputEdit" >
@@ -317,6 +336,14 @@ class EditPage extends Component {
                             !this.success ?
                                 <div className={messageBoxScc.join(' ')}>
                                     <div className={successClass.join(' ')}> {this.state.successText}
+                                        <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
+                                    </div>
+                                </div> : ''
+                        }
+                        {
+                            this.state.imageOverSize ?
+                                <div className={messageImageOver.join(' ')}>
+                                    <div className={imageOverClass.join(' ')}> {this.state.imageOverSizeTxt}
                                         <FontAwesomeIcon className="closeIcon" icon={faWindowClose} onClick={this.close} />
                                     </div>
                                 </div> : ''

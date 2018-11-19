@@ -696,7 +696,7 @@ textarea::placeholder{
     margin: 0;
     width: 23px;
     cursor: pointer;
-    color: #1d8348;
+    color: #fff;
     height: 23px;
 }
 
